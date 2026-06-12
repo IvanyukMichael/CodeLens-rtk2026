@@ -1,0 +1,32 @@
+# CodeLens — закреплённые зависимости (conda env `codelens`, Python 3.12).
+# Установка:  pip install -r requirements.txt
+#
+# Только пакеты, реально импортируемые нашим решением. Зависимости индексируемого
+# кода (fastapi, sqlalchemy, pydantic, ...) сюда НЕ входят — мы его парсим через AST,
+# а не запускаем. Транзитивные зависимости (tokenizers, safetensors, huggingface-hub,
+# scipy, scikit-learn ...) pip ставит автоматически.
+
+# --- PyTorch (CUDA-сборка cu128) ---
+# Ставится с индекса PyTorch (строка ниже). Для CPU-окружения замените на
+# `torch==2.11.0` и удалите строку --extra-index-url.
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0+cu128
+
+# --- Эмбеддинги и трансформеры ---
+sentence-transformers==5.5.1   # bge-m3: индексация и поиск
+transformers==5.11.0           # пин важен (см. gte-Qwen2-gotcha в research report)
+
+# --- Векторная БД (требование ТЗ) + численное ядро ---
+chromadb==1.5.9
+numpy==2.4.4
+
+# --- UI и страница метрик ---
+streamlit==1.58.0
+pandas==3.0.3
+
+# --- HyDE через HTTP API Ollama + починка SSL_CERT_FILE ---
+requests==2.34.2
+certifi==2026.5.20
+
+# --- Исследовательский слой (ablation: BM25-гибрид) ---
+rank-bm25==0.2.2
