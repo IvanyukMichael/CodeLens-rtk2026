@@ -1,0 +1,32 @@
+{
+  "rows": {
+    "temp=0.2 seed-cache (frozen)": {
+      "total": 0.8215962441314554,
+      "official": 0.8222222222222223,
+      "extended": 0.8214285714285714
+    },
+    "temp=0.2 live": {
+      "total": 0.8309859154929577,
+      "official": 0.8,
+      "extended": 0.8392857142857143
+    },
+    "temp=0 live (run 1)": {
+      "total": 0.8309859154929577,
+      "official": 0.8,
+      "extended": 0.8392857142857143
+    },
+    "temp=0 live (run 2)": {
+      "total": 0.8309859154929577,
+      "official": 0.8,
+      "extended": 0.8392857142857143
+    }
+  },
+  "determinism": {
+    "text_diff_qids": [
+      "q_13",
+      "g_08"
+    ],
+    "score_diff_qids": [],
+    "n_questions": 71
+  }
+}

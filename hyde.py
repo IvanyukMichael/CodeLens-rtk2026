@@ -59,13 +59,18 @@ SYSTEM_PROMPT = (
 _FENCE = re.compile(r"^```[a-zA-Z]*\s*|\s*```$", re.MULTILINE)
 
 
-def ollama_generate(question: str) -> str:
+def ollama_generate(question: str, temperature: float = 0.0) -> str:
+    """Генерирует HyDE-фрагмент локальной LLM.
+
+    temperature=0 (по умолчанию) — greedy-декодирование: генерация
+    детерминирована, поэтому «живьём» совпадает с кэшем и вопрос
+    воспроизводимости снимается (см. эксперимент exp_hyde_temp0.py)."""
     r = requests.post(OLLAMA_URL, json={
         "model": LLM_MODEL,
         "system": SYSTEM_PROMPT,
         "prompt": question,
         "stream": False,
-        "options": {"temperature": 0.2, "num_predict": 400},
+        "options": {"temperature": temperature, "num_predict": 400},
     }, timeout=180)
     r.raise_for_status()
     text = r.json()["response"].strip()

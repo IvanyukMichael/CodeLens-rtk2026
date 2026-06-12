@@ -1,7 +1,9 @@
-"""CodeLens — поисковое ядро (финальная замороженная конфигурация).
+"""CodeLens — поисковое ядро (финальная конфигурация).
 
 Конфигурация ретрива: bge-m3 + enriched (в базе) + HyDE-mix на стороне запроса
-(α=0.5), P@5=0.822. Читает коллекцию `codelens`, построенную index.py.
+(α=0.5), HyDE greedy при temperature=0 (детерминирован). Воспроизводимо вживую:
+P@5 = 0.800 (офиц. 15) / 0.831 (расш. 71), идентично между прогонами. Читает
+коллекцию `codelens`, построенную index.py.
 
     from search import search
     res = search("как создаётся токен доступа", top_k=5, use_hyde=True)
@@ -9,15 +11,17 @@
 Логика запроса:
     q_emb = bge-m3(query)                                  (normalize=True)
     если use_hyde и Ollama доступна:
-        hyde = qwen2.5-coder:7b(query)   # тот же промт/функция, что в hyde.py
+        hyde = qwen2.5-coder:7b(query, temp=0)   # тот же промт/функция, что в hyde.py
         h_emb = bge-m3(hyde)
         qvec = 0.5*q_emb + 0.5*h_emb     # mix-логика финальной конфигурации
     иначе:
         qvec = q_emb                     # graceful fallback, демо не падает
     top_k в ChromaDB (space=cosine) по qvec  ->  relevance% = (1 - distance)*100
 
-HyDE-генерации кэшируются по тексту запроса (cache/hyde_query_cache.json) —
-повторные запросы мгновенны и не зависят от Ollama.
+HyDE-генерации кэшируются по тексту запроса (cache/hyde_query_cache.json) — это
+ОБЫЧНЫЙ кэш ускорения: пишется из живых temp=0 генераций, повторные запросы
+мгновенны и не зависят от Ollama. Никакого frozen-сида: cache miss => живая
+temp=0 генерация (детерминированная), которая ложится в тот же кэш.
 
 Промт HyDE и сам вызов LLM переиспользуются из hyde.py (не дублируем).
 """
@@ -112,7 +116,7 @@ def _get_hyde(query: str):
     if query in cache:
         return cache[query], True, None
     try:
-        text = ollama_generate(query)
+        text = ollama_generate(query, temperature=0.0)   # greedy => детерминированно
     except Exception as e:                          # ConnectionError/Timeout/… — fallback
         return None, False, f"{type(e).__name__}: {e}"
     if not text.strip():
