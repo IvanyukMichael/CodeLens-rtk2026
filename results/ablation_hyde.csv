@@ -1,0 +1,4 @@
+config,p5_total,p5_easy,p5_medium,p5_hard,p5_ru,p5_en
+bge-m3+enriched,0.767,0.9,0.861,0.458,0.708,0.833
+bge-m3+enriched+hyde_pure,0.744,0.9,0.694,0.625,0.75,0.738
+bge-m3+enriched+hyde_mix,0.822,0.9,0.889,0.625,0.792,0.857
