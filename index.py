@@ -24,6 +24,8 @@ import sys
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
+import sslfix  # noqa: F401  — чинит битый SSL_CERT_FILE до сетевых вызовов HF
+
 import os
 import time
 from pathlib import Path
