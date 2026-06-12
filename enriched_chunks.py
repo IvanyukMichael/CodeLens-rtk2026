@@ -1,15 +1,9 @@
-"""Enrichment чанков (§4.1 CLAUDE.md).
+"""CLI-обёртка над enrichment (§4.1 CLAUDE.md): дамп cache/enriched_texts.json.
 
-Вместо голого кода эмбеддим обогащённый текст вида:
-
-    [путь/к/файлу.py] [class РодительскийКласс]   <- класс только если это метод
-    def имя(аргументы) -> тип:                     <- сигнатура из AST
-    docstring                                      <- если есть
-    --- код ---
-    <полный исходный код чанка>
-
-Идея: «прибить» к вектору контекст (где это и что это) и docstring на
-естественном языке — это закрывает разрыв «вопрос на NL ↔ имена в коде».
+Сама логика enrichment живёт в общем модуле enrich.py (единый источник правды
+для index.py и экспериментов). Здесь — только re-export и демо-скрипт, чтобы
+исторические импорты `from enriched_chunks import build_enriched_map`
+(eval_runner, ablation_full, hyde) продолжали работать без изменений.
 
 Запуск:
     python enriched_chunks.py            # -> cache/enriched_texts.json + пример
@@ -24,29 +18,10 @@ import json
 from pathlib import Path
 
 from extract_chunks import extract_repo
+from enrich import build_enriched, build_enriched_map  # noqa: F401  (re-export)
 
 REPO = Path("gymhero")
 OUT = Path("cache/enriched_texts.json")
-
-
-def build_enriched(chunk: dict) -> str:
-    """Собирает обогащённый текст одного чанка."""
-    head = f"[{chunk['path']}]"
-    if chunk["kind"] == "function" and "." in chunk["name"]:
-        parent = chunk["name"].rsplit(".", 1)[0]          # ClassName (метод)
-        head += f" [class {parent}]"
-
-    parts = [head, chunk["signature"]]
-    if chunk["docstring"]:
-        parts.append(chunk["docstring"])
-    parts.append("--- код ---")
-    parts.append(chunk["code"])
-    return "\n".join(parts)
-
-
-def build_enriched_map(chunks: list[dict]) -> dict[str, str]:
-    """{chunk_id: enriched_text} для всех чанков (порядок исходный)."""
-    return {c["chunk_id"]: build_enriched(c) for c in chunks}
 
 
 def main() -> None:
