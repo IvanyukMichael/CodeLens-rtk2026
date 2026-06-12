@@ -1,0 +1,152 @@
+[
+  {
+    "question_id": "q_01",
+    "top_5_chunks": [
+      "gymhero/config.py:ContainerDevSettings:37",
+      "gymhero/config.py:ContainerTestSettings:44",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/user.py:UserInDB:23",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26"
+    ]
+  },
+  {
+    "question_id": "q_02",
+    "top_5_chunks": [
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/schemas/user.py:UserOut:18",
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/config.py:LocalTestSettings:51",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26"
+    ]
+  },
+  {
+    "question_id": "q_03",
+    "top_5_chunks": [
+      "gymhero/crud/user.py:UserCRUDRepository.is_super_user:25",
+      "gymhero/security.py:verify_password:38",
+      "gymhero/schemas/user.py:UserInDB:23",
+      "gymhero/crud/user.py:UserCRUDRepository.is_active_user:38",
+      "gymhero/schemas/user.py:UserCreate:12"
+    ]
+  },
+  {
+    "question_id": "q_04",
+    "top_5_chunks": [
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/models/user.py:User:7",
+      "gymhero/api/routes/level.py:create_level:97",
+      "gymhero/models/user.py:User.__repr__:20",
+      "gymhero/schemas/exercise.py:ExerciseCreate:25"
+    ]
+  },
+  {
+    "question_id": "q_05",
+    "top_5_chunks": [
+      "gymhero/security.py:verify_password:38",
+      "gymhero/security.py:get_password_hash:52",
+      "gymhero/config.py:ContainerDevSettings:37",
+      "gymhero/config.py:ContainerTestSettings:44",
+      "gymhero/config.py:LocalTestSettings:51"
+    ]
+  },
+  {
+    "question_id": "q_06",
+    "top_5_chunks": [
+      "gymhero/database/db.py:get_db:11",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/database/db.py:get_ctx_db:32",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/level.py:LevelInDB:19"
+    ]
+  },
+  {
+    "question_id": "q_07",
+    "top_5_chunks": [
+      "gymhero/config.py:ContainerDevSettings:37",
+      "gymhero/config.py:ContainerTestSettings:44",
+      "gymhero/models/user.py:User.__repr__:20",
+      "gymhero/models/training_plan.py:TrainingPlan.__repr__:42",
+      "gymhero/models/exercise.py:ExerciseType.__repr__:41"
+    ]
+  },
+  {
+    "question_id": "q_08",
+    "top_5_chunks": [
+      "gymhero/config.py:ContainerDevSettings:37",
+      "gymhero/config.py:LocalDevSettings:58",
+      "gymhero/config.py:LocalTestSettings:51",
+      "gymhero/config.py:ContainerTestSettings:44",
+      "gymhero/config.py:get_settings:65"
+    ]
+  },
+  {
+    "question_id": "q_09",
+    "top_5_chunks": [
+      "gymhero/schemas/body_part.py:BodyPartInDB:19",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26",
+      "gymhero/schemas/user.py:UserOut:18"
+    ]
+  },
+  {
+    "question_id": "q_10",
+    "top_5_chunks": [
+      "gymhero/exceptions.py:_get_credential_exception:5",
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/config.py:get_settings:65",
+      "gymhero/api/routes/level.py:delete_level:132"
+    ]
+  },
+  {
+    "question_id": "q_11",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise.py:ExerciseCreate:25",
+      "gymhero/schemas/exercise.py:ExerciseBase:12",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/models/training_plan.py:TrainingPlan.__repr__:42",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37"
+    ]
+  },
+  {
+    "question_id": "q_12",
+    "top_5_chunks": [
+      "gymhero/models/training_plan.py:TrainingPlan.__repr__:42",
+      "gymhero/models/training_unit.py:TrainingUnit.__repr__:42",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/schemas/exercise.py:ExerciseOut:48",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ]
+  },
+  {
+    "question_id": "q_13",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise.py:ExerciseBase:12",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/exercise.py:ExerciseOut:48",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26"
+    ]
+  },
+  {
+    "question_id": "q_14",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/schemas/user.py:UserOut:18",
+      "gymhero/schemas/exercise.py:ExerciseOut:48",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26"
+    ]
+  },
+  {
+    "question_id": "q_15",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/exercise.py:ExerciseCreate:25",
+      "gymhero/api/routes/body_part.py:fetch_body_parts:24",
+      "gymhero/crud/base.py:CRUDRepository.get_many:53",
+      "gymhero/models/exercise.py:ExerciseType:32"
+    ]
+  }
+]
