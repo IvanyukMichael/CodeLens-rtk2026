@@ -1,0 +1,798 @@
+[
+  {
+    "question_id": "q_01",
+    "query": "как в проекте создаётся токен доступа и какой срок его жизни?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/security.py:create_access_token:12",
+      "gymhero/config.py:Settings:11"
+    ],
+    "difficulty": "easy",
+    "category": "auth",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_02",
+    "query": "how does the project verify a JWT token from an incoming request?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/dependencies.py:get_token:35",
+      "gymhero/api/dependencies.py:get_current_user:58",
+      "gymhero/exceptions.py:_get_credential_exception:5"
+    ],
+    "difficulty": "hard",
+    "category": "auth",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_03",
+    "query": "где в проекте проверяется, является ли пользователь суперпользователем?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/user.py:UserCRUDRepository.is_super_user:25",
+      "gymhero/api/dependencies.py:get_current_superuser:105"
+    ],
+    "difficulty": "easy",
+    "category": "auth",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_04",
+    "query": "how does the project create a new account and what response is sent if the email is taken?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/crud/user.py:UserCRUDRepository.get_user_by_email:11"
+    ],
+    "difficulty": "medium",
+    "category": "api",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_05",
+    "query": "как в проекте хранится и проверяется пароль пользователя при входе?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/security.py:verify_password:38",
+      "gymhero/crud/user.py:UserCRUDRepository.authenticate_user:67"
+    ],
+    "difficulty": "medium",
+    "category": "auth",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_06",
+    "query": "what database session management strategy does the project use for FastAPI endpoints?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/database/db.py:get_db:11",
+      "gymhero/database/session.py:get_local_session:42"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_07",
+    "query": "как формируется строка подключения к PostgreSQL из настроек приложения?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/database/session.py:build_sqlalchemy_database_url_from_settings:8"
+    ],
+    "difficulty": "easy",
+    "category": "config",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_08",
+    "query": "how does the project load configuration depending on the runtime environment?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/config.py:get_settings:65",
+      "gymhero/config.py:Settings:11",
+      "gymhero/config.py:LocalDevSettings:58"
+    ],
+    "difficulty": "medium",
+    "category": "config",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_09",
+    "query": "как базовый репозиторий реализует создание записи с привязкой к владельцу?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/base.py:CRUDRepository.create_with_owner:162"
+    ],
+    "difficulty": "easy",
+    "category": "db",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_10",
+    "query": "what error response is returned when credentials cannot be validated and what HTTP status code is used?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/exceptions.py:_get_credential_exception:5"
+    ],
+    "difficulty": "easy",
+    "category": "errors",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_11",
+    "query": "как проверяется уникальность плана тренировок при его создании?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:create_training_plan:192",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/crud/base.py:CRUDRepository.get_one:33"
+    ],
+    "difficulty": "medium",
+    "category": "business_logic",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_12",
+    "query": "how does the project prevent adding the same training unit to a plan twice?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.add_training_unit_to_training_plan:11",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325"
+    ],
+    "difficulty": "medium",
+    "category": "business_logic",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_13",
+    "query": "какие поля схемы обязательны при создании упражнения и как задаётся ограничение на их значения?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/schemas/exercise.py:ExerciseBase:12"
+    ],
+    "difficulty": "medium",
+    "category": "validation",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_14",
+    "query": "how does the project enforce that only the owner or a superuser can delete a training plan?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229",
+      "gymhero/api/dependencies.py:get_current_active_user:82",
+      "gymhero/crud/user.py:UserCRUDRepository.is_super_user:25"
+    ],
+    "difficulty": "hard",
+    "category": "api",
+    "subset": "official"
+  },
+  {
+    "question_id": "q_15",
+    "query": "как в проекте реализована пагинация запросов к базе данных и где задаются параметры по умолчанию?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/dependencies.py:get_pagination_params:19",
+      "gymhero/crud/base.py:CRUDRepository.get_many:53"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "official"
+  },
+  {
+    "question_id": "g_01",
+    "query": "Где описывается структура данных для тренировочного упражнения?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/schemas/training_unit.py:TrainingUnitInDB:22"
+    ],
+    "difficulty": "medium",
+    "category": "validation",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_02",
+    "query": "How does the project handle fetching body parts with pagination?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/body_part.py:fetch_body_parts:24"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_03",
+    "query": "Где в проекте определены базовые классы для работы с базами данных?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/database/base_class.py:Base:22"
+    ],
+    "difficulty": "medium",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_04",
+    "query": "Where is the schema for a training unit defined?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/training_unit.py:TrainingUnitOut:30"
+    ],
+    "difficulty": "medium",
+    "category": "validation",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_05",
+    "query": "Где в проекте используется этот контекстный менеджер для управления базой данных?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/database/db.py:get_ctx_db:32"
+    ],
+    "difficulty": "medium",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_06",
+    "query": "Where is the schema for user registration defined?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/auth.py:UserRegister:19"
+    ],
+    "difficulty": "medium",
+    "category": "auth",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_07",
+    "query": "Где в проекте создается и настраивается объект подключения к базе данных?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/database/session.py:get_engine:25"
+    ],
+    "difficulty": "easy",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_08",
+    "query": "How does the project handle fetching exercises for a specific user?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise.py:fetch_all_exercises_for_owner:46"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_09",
+    "query": "Где в проекте реализован метод для деактивации пользователя?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/user.py:UserCRUDRepository:10"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_10",
+    "query": "How does the project implement pagination for retrieving all training units?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:get_all_training_units:34"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_11",
+    "query": "Где в проекте реализован метод для удаления упражнения из плана тренировок?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_12",
+    "query": "How does the project handle fetching all exercise types with pagination?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise_type.py:fetch_all_exercise_types:28"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_13",
+    "query": "Где в проекте реализована функция для поиска тела части по имени?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77"
+    ],
+    "difficulty": "medium",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_14",
+    "query": "How does the project handle requests to retrieve a specific level by its ID?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/level.py:fetch_level_by_id:48"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_15",
+    "query": "Где в проекте задается конфигурация для разработки?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/config.py:ContainerDevSettings:37"
+    ],
+    "difficulty": "medium",
+    "category": "config",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_16",
+    "query": "How does the project handle fetching all levels with pagination?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/level.py:fetch_all_levels:23"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_17",
+    "query": "Где в проекте реализована логика пагинации для запроса всех упражнений?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise.py:fetch_all_exercises:22"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_18",
+    "query": "How does the project handle fetching a level by its name from the database?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/level.py:fetch_level_by_name:74"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_19",
+    "query": "Где в проекте реализована функция для получения всех пользователей с пагинацией?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/user.py:fetch_all_users:23"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_20",
+    "query": "how/where does the project handle removing an exercise from a training unit?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_21",
+    "query": "Где в проекте реализована функция для обновления типа упражнения?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140"
+    ],
+    "difficulty": "medium",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_22",
+    "query": "how does the project configure settings for testing?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/config.py:ContainerTestSettings:44"
+    ],
+    "difficulty": "medium",
+    "category": "config",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_23",
+    "query": "Где в проекте реализована логика получения всех упражнений в конкретной тренировочной единице?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365"
+    ],
+    "difficulty": "medium",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_24",
+    "query": "How/where does the project handle deleting an exercise type?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187"
+    ],
+    "difficulty": "medium",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_25",
+    "query": "Где в проекте реализована функция для поиска упражнения по названию?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_26",
+    "query": "How does the project determine if a specific exercise belongs to a training unit?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.check_if_exercise_in_training_unit:77"
+    ],
+    "difficulty": "medium",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_27",
+    "query": "Где в проекте реализована функция для получения всех тренировочных единиц для владельца с пагинацией?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:get_all_training_units_for_owner:58"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_28",
+    "query": "where is the training plan data structure defined?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/training_plan.py:TrainingPlanBase:9"
+    ],
+    "difficulty": "medium",
+    "category": "validation",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_29",
+    "query": "Где в проекте реализована логика проверки прав доступа к тренировочным планам?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450"
+    ],
+    "difficulty": "medium",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_30",
+    "query": "How does the project configure a logger for logging messages?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/log.py:get_logger:14"
+    ],
+    "difficulty": "medium",
+    "category": "business_logic",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_31",
+    "query": "Где описывается структура данных для упражнений в проекте?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/models/exercise.py:Exercise:8"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_32",
+    "query": "Where is the schema for a body part defined?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/models/body_part.py:BodyPart:7"
+    ],
+    "difficulty": "medium",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_33",
+    "query": "Где в проекте реализован метод для получения всех тренировочных планов пользователя?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_34",
+    "query": "How does the project handle retrieving all training plans with pagination?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_35",
+    "query": "Где описывается структура данных для JWT токена в данном проекте?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/schemas/auth.py:TokenPayload:13"
+    ],
+    "difficulty": "easy",
+    "category": "auth",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_36",
+    "query": "How/where does the project handle adding an existing exercise to a training unit?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_37",
+    "query": "Где в проекте реализована логика создания нового уровня и как она обрабатывает ошибки?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/level.py:create_level:97"
+    ],
+    "difficulty": "medium",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_38",
+    "query": "How does the project handle user passwords?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/security.py:get_password_hash:52"
+    ],
+    "difficulty": "easy",
+    "category": "auth",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_39",
+    "query": "Где в проекте реализован метод для создания новой записи в базе данных?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/base.py:CRUDRepository.create:87"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_40",
+    "query": "Where is the schema for a user's training plan defined?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/training_plan.py:TrainingPlanOut:30"
+    ],
+    "difficulty": "medium",
+    "category": "validation",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_41",
+    "query": "Где в проекте хранятся и как извлекаются упражнения, связанные с конкретным тренировочным блоком?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.get_exercises_in_training_unit:64"
+    ],
+    "difficulty": "medium",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_42",
+    "query": "Where is the schema for user data defined?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/user.py:UserBase:6"
+    ],
+    "difficulty": "medium",
+    "category": "validation",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_43",
+    "query": "Где в проекте определены настройки для локального тестирования?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/config.py:LocalTestSettings:51"
+    ],
+    "difficulty": "medium",
+    "category": "config",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_44",
+    "query": "How/where does the project handle retrieving a training plan by its ID, considering user privileges?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86"
+    ],
+    "difficulty": "medium",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_45",
+    "query": "Где в проекте реализована функция для поиска пользователя по ID?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/user.py:fetch_user_by_id:46"
+    ],
+    "difficulty": "easy",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_46",
+    "query": "Where is the schema for an exercise defined in the code?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/exercise.py:ExerciseInDB:37"
+    ],
+    "difficulty": "medium",
+    "category": "validation",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_47",
+    "query": "Где в проекте реализована логика аутентификации и генерации токена доступа?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/auth.py:login_for_access_token:19"
+    ],
+    "difficulty": "medium",
+    "category": "auth",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_48",
+    "query": "How/where does the project handle cases where a specified training unit is not found within a training plan during removal?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_49",
+    "query": "Где в проекте реализована функция для поиска пользователя по электронной почте?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/user.py:fetch_user_by_email:70"
+    ],
+    "difficulty": "medium",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_50",
+    "query": "How does the project handle updating records in the database?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/base.py:CRUDRepository.update:111"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_51",
+    "query": "Где в проекте реализованы методы для получения множества записей по владельцу?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/base.py:CRUDRepository.get_many_for_owner:189"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_52",
+    "query": "How does the project handle adding and removing exercises from a training unit?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12"
+    ],
+    "difficulty": "hard",
+    "category": "db",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_53",
+    "query": "Где описывается структура данных для токена доступа в проекте?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/schemas/auth.py:Token:6"
+    ],
+    "difficulty": "easy",
+    "category": "auth",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_54",
+    "query": "Where is the schema for an exercise type defined?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19"
+    ],
+    "difficulty": "medium",
+    "category": "validation",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_55",
+    "query": "Где в проекте реализованы проверки на наличие и права доступа при обновлении тренировочного плана?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:update_training_plan:279"
+    ],
+    "difficulty": "medium",
+    "category": "api",
+    "subset": "extended"
+  },
+  {
+    "question_id": "g_56",
+    "query": "Where is the schema for exercise types defined?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/models/exercise.py:ExerciseType:32"
+    ],
+    "difficulty": "medium",
+    "category": "db",
+    "subset": "extended"
+  }
+]
