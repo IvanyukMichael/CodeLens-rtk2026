@@ -30,3 +30,8 @@ certifi==2026.5.20
 
 # --- Исследовательский слой (ablation: BM25-гибрид) ---
 rank-bm25==0.2.2
+
+# --- Графики research report (analysis.ipynb) ---
+matplotlib==3.11.0
+# Пересборка графиков headless:  jupyter nbconvert --to notebook --execute --inplace analysis.ipynb
+# (требует nbconvert — dev-инструмент, не часть рантайма продукта)
