@@ -18,6 +18,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+import chat
 import search
 from score import score_question
 
@@ -37,12 +38,8 @@ def get_engine():
 
 @st.cache_data(ttl=30, show_spinner=False)
 def ollama_up() -> bool:
-    try:
-        import requests
-        requests.get("http://localhost:11434/api/tags", timeout=1.5)
-        return True
-    except Exception:
-        return False
+    # Адрес берём из chat/hyde (настраивается через env OLLAMA_URL для Docker).
+    return chat.ollama_available()
 
 
 def db_ready() -> bool:
@@ -165,7 +162,7 @@ def render_results(res: dict) -> None:
         st.warning(f"⚠️ Латентность {total_s:.2f} с > 3 с")
 
 
-tab_search, tab_metrics = st.tabs(["🔎 Поиск", "📊 Метрики"])
+tab_search, tab_chat, tab_metrics = st.tabs(["🔎 Поиск", "💬 Ответ (LLM)", "📊 Метрики"])
 
 with tab_search:
     st.subheader("Поиск по коду")
@@ -187,6 +184,67 @@ with tab_search:
     else:
         st.caption("Примеры: «как хешируется пароль», «создание пользователя в БД», "
                    "«rate limiting» (негативный — такого в базе нет).")
+
+
+def render_fragments_compact(results: list[dict]) -> None:
+    """Компактный список фрагментов под LLM-ответом (источники)."""
+    for i, hit in enumerate(results, 1):
+        with st.expander(
+            f"{i}. {hit['path']}:{hit['name']}  ·  relevance {hit['relevance']:.0f}%",
+            expanded=(i == 1)):
+            st.code(hit["code"], language="python")
+
+
+with tab_chat:
+    st.subheader("Связный ответ по найденному коду")
+    st.caption("RAG-ответ: ядро находит релевантные фрагменты, затем локальная LLM "
+               "(Ollama · qwen2.5-coder:7b) обобщает их в связный ответ со ссылками на "
+               "`path:name`. Отвечает строго по найденному коду — если ответа в нём "
+               "нет, честно об этом сообщает.")
+
+    _ollama_chat = ollama_up()
+    if not _ollama_chat:
+        st.warning("🔴 Ollama недоступна — LLM-ответ отключён. Будут показаны только "
+                   "найденные фрагменты. Запустите Ollama и `ollama pull "
+                   "qwen2.5-coder:7b`, чтобы включить генерацию ответа.")
+
+    with st.form("chat_form"):
+        chat_query = st.text_input(
+            "Вопрос (RU или EN)",
+            placeholder="напр.: как проверяется, что пользователь — суперпользователь?")
+        chat_submitted = st.form_submit_button("💬 Ответить", type="primary")
+
+    if chat_submitted and chat_query.strip():
+        with st.spinner("Поиск фрагментов…"):
+            cres = search.search(chat_query, top_k=chat.MAX_CHUNKS, use_hyde=use_hyde)
+        results = cres["results"]
+        if cres.get("warning"):
+            st.info("⚠️ " + cres["warning"])
+
+        if not results:
+            st.info("Ничего не найдено.")
+        else:
+            best = max(h["relevance"] for h in results)
+            if best < search.NEGATIVE_THRESHOLD:
+                st.error(
+                    f"🚫 Релевантного кода не найдено (лучшая релевантность {best:.0f}% < "
+                    f"{search.NEGATIVE_THRESHOLD:.0f}%). Вероятно, такой функциональности "
+                    f"нет в базе — LLM-ответ может быть неинформативным.")
+
+            if _ollama_chat:
+                st.markdown("#### 🤖 Ответ")
+                try:
+                    with st.spinner("Генерация ответа (Ollama)…"):
+                        st.write_stream(chat.ollama_chat_stream(chat_query, results))
+                except Exception as e:
+                    st.warning(f"Ollama не ответила ({type(e).__name__}). "
+                               f"Показаны только фрагменты.")
+
+            st.markdown("#### 📎 Источники (найденные фрагменты)")
+            render_fragments_compact(results)
+    else:
+        st.caption("Введите вопрос — система найдёт фрагменты и (если есть Ollama) "
+                   "соберёт из них связный ответ.")
 
 
 with tab_metrics:

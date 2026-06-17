@@ -1,0 +1,39 @@
+# CodeLens — Docker Compose (бонус §8 CLAUDE.md).
+#
+#   docker compose up --build           # собрать образ, построить базу, поднять UI
+#   открыть http://localhost:8501
+#
+# Локальный запуск двумя командами (python index.py + streamlit run app.py)
+# остаётся основным — это альтернативный путь. LLM (HyDE/чат) — опциональный
+# сервис ollama: без него продукт работает (HyDE из кэша, чат показывает фрагменты).
+
+services:
+  codelens:
+    build: .
+    image: codelens:latest
+    ports:
+      - "8501:8501"
+    environment:
+      # Внутри сети compose Ollama доступна по имени сервиса, а не localhost.
+      OLLAMA_URL: "http://ollama:11434/api/generate"
+      OLLAMA_MODEL: "qwen2.5-coder:7b"
+    volumes:
+      - hf_cache:/root/.cache/huggingface   # кэш моделей (bge-m3 ~2.3 ГБ) переживает пересборку
+      - chroma_db:/app/chroma_db            # персистентная база ChromaDB
+    depends_on:
+      - ollama
+
+  # Опциональная локальная LLM. После старта подтянуть модель:
+  #   docker compose exec ollama ollama pull qwen2.5-coder:7b
+  # Без этого шага HyDE/чат деградируют корректно (fallback).
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+
+volumes:
+  hf_cache:
+  chroma_db:
+  ollama_models:

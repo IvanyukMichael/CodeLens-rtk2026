@@ -27,6 +27,7 @@ if hasattr(sys.stdout, "reconfigure"):
 import argparse
 import csv
 import json
+import os
 import re
 from pathlib import Path
 
@@ -40,8 +41,10 @@ from eval_runner import (
 )
 
 RETRIEVER = "BAAI/bge-m3"
-OLLAMA_URL = "http://localhost:11434/api/generate"
-LLM_MODEL = "qwen2.5-coder:7b"
+# Адрес Ollama настраивается через env (для Docker-сети: http://ollama:11434/...).
+# По умолчанию — локальный сервер (основной путь продукта не меняется).
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434/api/generate")
+LLM_MODEL = os.environ.get("OLLAMA_MODEL", "qwen2.5-coder:7b")
 HYDE_CACHE = CACHE_DIR / "hyde_generations.json"
 
 SYSTEM_PROMPT = (

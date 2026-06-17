@@ -1,0 +1,20 @@
+# CodeLens — зависимости для Docker-образа (Linux, CPU).
+# Отличие от requirements.txt — CPU-сборка torch (в контейнере GPU не предполагаем).
+# Версии остальных пакетов совпадают с основным пином (воспроизводимость).
+
+torch==2.11.0                  # CPU-колесо с PyPI (см. комментарий в requirements.txt)
+sentence-transformers==5.5.1   # bge-m3: индексация и поиск
+transformers==5.11.0           # пин важен (gte-Qwen2-gotcha, research report)
+chromadb==1.5.9
+numpy==2.4.4
+streamlit==1.58.0
+pandas==3.0.3
+requests==2.34.2
+certifi==2026.5.20
+rank-bm25==0.2.2
+matplotlib==3.11.0
+
+# Второй язык (бонус): JS/Java через tree-sitter
+tree-sitter==0.25.2
+tree-sitter-javascript==0.25.0
+tree-sitter-java==0.23.5

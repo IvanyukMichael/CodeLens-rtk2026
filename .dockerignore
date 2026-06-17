@@ -1,0 +1,8 @@
+# Не копируем в образ: git, кэши Python, рантайм-базу, логи, ноутбук-чекпоинты.
+# cache/ НЕ исключаем — там HyDE-кэш, нужный для офлайн-работы без Ollama.
+.git
+__pycache__
+*.pyc
+chroma_db
+_index_log.txt
+.ipynb_checkpoints

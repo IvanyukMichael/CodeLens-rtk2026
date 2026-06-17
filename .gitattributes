@@ -1,0 +1,2 @@
+# Shell-скрипты всегда с LF — иначе /bin/sh в Linux-контейнере падает на CRLF.
+*.sh text eol=lf
