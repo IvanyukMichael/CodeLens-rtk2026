@@ -50,6 +50,35 @@ def db_ready() -> bool:
         return False
 
 
+@st.cache_data(ttl=30, show_spinner=False)
+def corpus_overview() -> dict:
+    """Состав индексируемой базы прямо из ChromaDB (для вкладки Метрик).
+    Читает метаданные коллекции и считает файлы/чанки по источникам и языкам.
+    Фолбэк по `path` — чтобы корректно работать и на старой базе без полей
+    source/lang (тогда source = первый компонент пути, lang = python)."""
+    from collections import defaultdict
+    col = search.get_collection()
+    metas = col.get(include=["metadatas"]).get("metadatas") or []
+
+    src_files, src_chunks, lang_chunks, all_files = (
+        defaultdict(set), defaultdict(int), defaultdict(int), set())
+    for m in metas:
+        path = m.get("path", "")
+        src = m.get("source") or (path.split("/", 1)[0] if path else "?")
+        lang = m.get("lang") or "python"
+        src_files[src].add(path)
+        src_chunks[src] += 1
+        lang_chunks[lang] += 1
+        all_files.add(path)
+
+    by_source = sorted(([s, len(src_files[s]), src_chunks[s]] for s in src_chunks),
+                       key=lambda r: -r[2])
+    by_lang = sorted(([lng, lang_chunks[lng]] for lng in lang_chunks),
+                     key=lambda r: -r[1])
+    return {"n_files": len(all_files), "n_chunks": len(metas),
+            "n_langs": len(lang_chunks), "by_source": by_source, "by_lang": by_lang}
+
+
 # ─────────────────────────────── eval-хелперы ───────────────────────────────────
 def run_eval(questions: list[dict], use_hyde: bool, progress=None) -> list[dict]:
     per_q = []
@@ -76,8 +105,10 @@ def aggregate(per_q: list[dict]) -> pd.DataFrame:
     for lang in ("ru", "en"):
         rows.append(row(f"язык: {lang}", lambda r, lang=lang: r.get("language") == lang))
     if any("subset" in r for r in per_q):
-        rows.append(row("официальные 15", lambda r: r.get("subset") == "official"))
-        rows.append(row("расширенные 56", lambda r: r.get("subset") == "extended"))
+        n_off = sum(1 for r in per_q if r.get("subset") == "official")
+        n_ext = sum(1 for r in per_q if r.get("subset") == "extended")
+        rows.append(row(f"официальные ({n_off})", lambda r: r.get("subset") == "official"))
+        rows.append(row(f"расширенные ({n_ext})", lambda r: r.get("subset") == "extended"))
     return pd.DataFrame([r for r in rows if r is not None])
 
 
@@ -248,19 +279,59 @@ with tab_chat:
 
 
 with tab_metrics:
+    st.subheader("📦 Состав индексируемой базы")
+    st.caption("Живые числа из ChromaDB. Требование ТЗ — база ≥ 80 файлов. "
+               "Поиск идёт по всему корпусу: gymhero (официальный) + открытые репозитории "
+               "(click, rich) + JS/Java-демокорпус.")
+    ov = corpus_overview()
+    c = st.columns(3)
+    c[0].metric("Файлов", ov["n_files"],
+                help="Уникальных файлов, попавших в индекс (с ≥1 чанком; пустые "
+                     "__init__.py без функций/классов сюда не входят)")
+    c[1].metric("Чанков", ov["n_chunks"],
+                help="Функций / классов / методов в коллекции")
+    c[2].metric("Языков", ov["n_langs"],
+                help="python / javascript / java")
+    if ov["n_files"] >= 80:
+        st.success(f"✅ {ov['n_files']} файлов ≥ 80 (требование ТЗ выполнено)")
+    else:
+        st.warning(f"⚠️ {ov['n_files']} файлов < 80 — пересоберите индекс: `python index.py` "
+                   f"(сейчас в базе только часть корпуса).")
+    ov_cols = st.columns(2)
+    with ov_cols[0]:
+        st.caption("По источникам")
+        st.dataframe(
+            pd.DataFrame(ov["by_source"], columns=["Источник", "Файлов", "Чанков"]),
+            use_container_width=True, hide_index=True)
+    with ov_cols[1]:
+        st.caption("По языкам")
+        st.dataframe(
+            pd.DataFrame(ov["by_lang"], columns=["Язык", "Чанков"]),
+            use_container_width=True, hide_index=True)
+    st.divider()
+
     st.subheader("Precision@5 (официальный score.py)")
     st.caption("Живой прогон: для каждого вопроса делаем поиск текущим ядром и "
                "считаем P@5 тем же score_question, что у организаторов. "
                f"Режим HyDE берётся из сайдбара (сейчас: {'вкл' if use_hyde else 'выкл'}).")
 
+    def _count(path: Path, default: int) -> int:
+        try:
+            return len(json.loads(path.read_text(encoding="utf-8")))
+        except Exception:
+            return default
+
+    n_off = _count(OFFICIAL_EVAL, 15)
+    n_comb = _count(COMBINED_EVAL, 71)
+    opt_off, opt_comb = f"Официальный ({n_off})", f"Расширенный ({n_comb})"
     eval_choice = st.radio(
-        "Набор вопросов", ["Официальный (15)", "Расширенный (71)"],
+        "Набор вопросов", [opt_off, opt_comb],
         horizontal=True,
-        help="Чемпионатная метрика считается на официальных 15. Расширенный набор "
-             "(71) — наш для устойчивости оценки.")
+        help=f"Чемпионатная метрика считается на официальных {n_off}. Расширенный "
+             f"набор ({n_comb}) — наш для устойчивости оценки.")
 
     if st.button("▶ Прогнать eval", type="primary"):
-        path = OFFICIAL_EVAL if eval_choice.startswith("Офиц") else COMBINED_EVAL
+        path = OFFICIAL_EVAL if eval_choice == opt_off else COMBINED_EVAL
         if not path.exists():
             st.error(f"Файл вопросов не найден: {path}")
         else:
