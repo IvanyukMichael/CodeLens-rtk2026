@@ -84,7 +84,8 @@
     "query": "Где в проекте реализован метод для деактивации пользователя?",
     "language": "ru",
     "correct_chunk_ids": [
-      "gymhero/crud/user.py:UserCRUDRepository:10"
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/crud/user.py:UserCRUDRepository.deactivate_user:51"
     ],
     "difficulty": "hard",
     "category": "db"
@@ -104,7 +105,8 @@
     "query": "Где в проекте реализован метод для удаления упражнения из плана тренировок?",
     "language": "ru",
     "correct_chunk_ids": [
-      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10"
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36"
     ],
     "difficulty": "hard",
     "category": "db"
@@ -514,7 +516,9 @@
     "query": "How does the project handle adding and removing exercises from a training unit?",
     "language": "en",
     "correct_chunk_ids": [
-      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12"
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39"
     ],
     "difficulty": "hard",
     "category": "db"
@@ -555,6 +559,996 @@
     "language": "en",
     "correct_chunk_ids": [
       "gymhero/models/exercise.py:ExerciseType:32"
+    ],
+    "difficulty": "medium",
+    "category": "db"
+  },
+  {
+    "question_id": "g_57",
+    "query": "как получить одну часть тела по её идентификатору через API?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_58",
+    "query": "which endpoint adds a new body part and what error is returned if it already exists?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/body_part.py:create_body_part:102"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_59",
+    "query": "как удалить часть тела по идентификатору и кто имеет на это право?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/body_part.py:delete_body_part:130"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_60",
+    "query": "how does the API update an existing body part by id?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/body_part.py:update_body_part:173"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_61",
+    "query": "где обрабатывается запрос на получение упражнения по id, если оно не найдено?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_62",
+    "query": "how does the service add a new exercise and which user is allowed to do it?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise.py:create_exercise:133"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_63",
+    "query": "как изменить существующее упражнение через API и что вернётся, если его нет?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise.py:update_exercise:182"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_64",
+    "query": "how is an exercise removed by id and who has permission for it?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise.py:delete_exercise:232"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_65",
+    "query": "как получить тип упражнения по идентификатору?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_66",
+    "query": "how does the API find an exercise type by its name?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_67",
+    "query": "как добавить новый тип упражнения и какая ошибка при совпадении имени?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_68",
+    "query": "which endpoint removes a difficulty level by id and who can call it?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/level.py:delete_level:132"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_69",
+    "query": "как обновить уровень сложности по идентификатору?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/level.py:update_level:176"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_70",
+    "query": "how is a training plan looked up by its name?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_71",
+    "query": "где суперпользователь ищет планы тренировок по названию среди всех владельцев?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_72",
+    "query": "how does the API detach a training unit from a training plan?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_73",
+    "query": "как получить тренировочный блок по идентификатору?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_74",
+    "query": "how is a training unit retrieved by its name?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_75",
+    "query": "как найти список тренировочных блоков по названию?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_76",
+    "query": "which endpoint creates a new training unit and what response on a duplicate name?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:create_training_unit:186"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_77",
+    "query": "как обновить тренировочный блок и что если его не существует?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:update_training_unit:222"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_78",
+    "query": "how is a training unit removed by id and who is permitted?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_79",
+    "query": "как привязать упражнение к тренировочному блоку через API?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_80",
+    "query": "how does the API detach an exercise from a training unit?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_81",
+    "query": "как зарегистрировать нового пользователя и какая ошибка, если почта уже занята?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/user.py:create_user:95"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_82",
+    "query": "which endpoint removes a user account by id and who may perform it?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/user.py:delete_user:130"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_83",
+    "query": "как обновить данные учётной записи пользователя через API?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/user.py:update_user:175"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_84",
+    "query": "where is the reusable base class that implements shared create, read, update and delete operations for all entities?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/base.py:CRUDRepository:20"
+    ],
+    "difficulty": "medium",
+    "category": "db"
+  },
+  {
+    "question_id": "g_85",
+    "query": "где базовый репозиторий запоминает, с какой ORM-моделью он работает?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/base.py:CRUDRepository.__init__:23"
+    ],
+    "difficulty": "medium",
+    "category": "db"
+  },
+  {
+    "question_id": "g_86",
+    "query": "how does the generic repository remove a record from the database?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/base.py:CRUDRepository.delete:145"
+    ],
+    "difficulty": "medium",
+    "category": "db"
+  },
+  {
+    "question_id": "g_87",
+    "query": "как получить список тренировочных блоков, входящих в план тренировок?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.get_training_units_in_training_plan:62"
+    ],
+    "difficulty": "medium",
+    "category": "db"
+  },
+  {
+    "question_id": "g_88",
+    "query": "how does the project check whether a user account is active?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/user.py:UserCRUDRepository.is_active_user:38"
+    ],
+    "difficulty": "medium",
+    "category": "db"
+  },
+  {
+    "question_id": "g_89",
+    "query": "где пользователь помечается неактивным при мягком отключении учётной записи?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/user.py:UserCRUDRepository.deactivate_user:51"
+    ],
+    "difficulty": "medium",
+    "category": "db"
+  },
+  {
+    "question_id": "g_90",
+    "query": "which ORM class maps difficulty levels to their database table?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/models/level.py:Level:7"
+    ],
+    "difficulty": "medium",
+    "category": "db"
+  },
+  {
+    "question_id": "g_91",
+    "query": "где задана ORM-модель таблицы для тренировочных блоков?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/models/training_unit.py:TrainingUnit:23"
+    ],
+    "difficulty": "medium",
+    "category": "db"
+  },
+  {
+    "question_id": "g_92",
+    "query": "which ORM model defines the users table and its columns?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/models/user.py:User:7"
+    ],
+    "difficulty": "medium",
+    "category": "db"
+  },
+  {
+    "question_id": "g_93",
+    "query": "где описана схема части тела с полем идентификатора из базы?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/schemas/body_part.py:BodyPartInDB:19"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_94",
+    "query": "where is the response schema for a body part defined?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/body_part.py:BodyPartOut:26"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_95",
+    "query": "какие поля можно передать при изменении упражнения и где эта схема?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/schemas/exercise.py:ExerciseUpdate:29"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_96",
+    "query": "where is the output schema describing an exercise in API responses?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/exercise.py:ExerciseOut:48"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_97",
+    "query": "где определены поля, возвращаемые клиенту для типа упражнения?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_98",
+    "query": "where is the schema for a difficulty level as stored in the database?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/level.py:LevelInDB:19"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_99",
+    "query": "где описана схема плана тренировок с полями из БД?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_100",
+    "query": "where are the base fields of a training unit schema declared?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/training_unit.py:TrainingUnitBase:9"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_101",
+    "query": "какие поля нужны для регистрации пользователя и где эта входная схема?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/schemas/user.py:UserCreate:12"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_102",
+    "query": "where is the schema describing user data returned by the API?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/user.py:UserOut:18"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_103",
+    "query": "где описана схема пользователя с хешем пароля для внутреннего использования?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/schemas/user.py:UserInDB:23"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_104",
+    "query": "which schema lists the fields allowed when modifying a user?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/schemas/user.py:UserUpdate:28"
+    ],
+    "difficulty": "medium",
+    "category": "validation"
+  },
+  {
+    "question_id": "g_105",
+    "query": "how does the base repository persist a new record built from a pydantic schema?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/base.py:CRUDRepository.create:87"
+    ],
+    "difficulty": "hard",
+    "category": "db"
+  },
+  {
+    "question_id": "g_106",
+    "query": "как базовый репозиторий применяет частичное обновление полей записи в БД?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/base.py:CRUDRepository.update:111"
+    ],
+    "difficulty": "hard",
+    "category": "db"
+  },
+  {
+    "question_id": "g_107",
+    "query": "how does the project fetch paginated records belonging to a specific owner?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/base.py:CRUDRepository.get_many_for_owner:189"
+    ],
+    "difficulty": "hard",
+    "category": "db"
+  },
+  {
+    "question_id": "g_108",
+    "query": "where is the repository class with training-plan-specific database operations?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10"
+    ],
+    "difficulty": "hard",
+    "category": "db"
+  },
+  {
+    "question_id": "g_109",
+    "query": "как на уровне доступа к данным открепить тренировочный блок от плана?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36"
+    ],
+    "difficulty": "hard",
+    "category": "db"
+  },
+  {
+    "question_id": "g_110",
+    "query": "где собраны операции с БД для управления упражнениями внутри тренировочных блоков?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12"
+    ],
+    "difficulty": "hard",
+    "category": "db"
+  },
+  {
+    "question_id": "g_111",
+    "query": "как на уровне репозитория добавить упражнение в блок, избегая дублирования?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13"
+    ],
+    "difficulty": "hard",
+    "category": "db"
+  },
+  {
+    "question_id": "g_112",
+    "query": "как убрать упражнение из тренировочного блока в слое доступа к данным?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39"
+    ],
+    "difficulty": "hard",
+    "category": "db"
+  },
+  {
+    "question_id": "g_113",
+    "query": "where is the repository that adds user-specific queries like lookup by e-mail and authentication?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/crud/user.py:UserCRUDRepository:10"
+    ],
+    "difficulty": "hard",
+    "category": "db"
+  },
+  {
+    "question_id": "g_114",
+    "query": "which ORM model maps exercises to their database table and relationships?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/models/exercise.py:Exercise:8"
+    ],
+    "difficulty": "hard",
+    "category": "db"
+  },
+  {
+    "question_id": "g_115",
+    "query": "how does the login endpoint issue a JWT after validating the submitted credentials?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/auth.py:login_for_access_token:19"
+    ],
+    "difficulty": "medium",
+    "category": "auth"
+  },
+  {
+    "question_id": "g_116",
+    "query": "how does the API fetch a single body part by id and respond when it is absent?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_117",
+    "query": "how is a body part located by its name through the API?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_118",
+    "query": "как добавить новую часть тела и какая ошибка при дубликате названия?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/body_part.py:create_body_part:102"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_119",
+    "query": "which endpoint deletes a body part by id and who is allowed to call it?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/body_part.py:delete_body_part:130"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_120",
+    "query": "как изменить существующую часть тела через API?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/body_part.py:update_body_part:173"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_121",
+    "query": "how does the API return one exercise by its id, or 404 if it is missing?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_122",
+    "query": "как создаётся новое упражнение и кто имеет право его добавить?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise.py:create_exercise:133"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_123",
+    "query": "how is an existing exercise modified through the API?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise.py:update_exercise:182"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_124",
+    "query": "как удалить упражнение по идентификатору и кому это разрешено?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise.py:delete_exercise:232"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_125",
+    "query": "how does the API retrieve an exercise type by id?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_126",
+    "query": "как найти тип упражнения по его названию?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_127",
+    "query": "which endpoint creates a new exercise type and what happens on a name clash?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_128",
+    "query": "how is an exercise type updated by id through the API?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_129",
+    "query": "как удалить тип упражнения и кто имеет на это право?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_130",
+    "query": "which endpoint adds a new difficulty level and who can create it?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/level.py:create_level:97"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_131",
+    "query": "как удалить уровень сложности по идентификатору?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/level.py:delete_level:132"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_132",
+    "query": "how does the API update a difficulty level by id?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/level.py:update_level:176"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_133",
+    "query": "как получить план тренировок по идентификатору?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_134",
+    "query": "как найти план тренировок по его названию?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_135",
+    "query": "how can a superuser search training plans by name across all owners?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_136",
+    "query": "how is an existing training plan updated through the API?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:update_training_plan:279"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_137",
+    "query": "как открепить тренировочный блок от плана тренировок через API?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_138",
+    "query": "which endpoint lists the training units contained in a training plan?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_139",
+    "query": "how does the API return a training unit by its id?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_140",
+    "query": "как получить тренировочный блок по названию?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_141",
+    "query": "how does the API list training units matching a given name?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_142",
+    "query": "как создать новый тренировочный блок и какая ошибка при дубликате?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:create_training_unit:186"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_143",
+    "query": "how is a training unit updated through the API?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:update_training_unit:222"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_144",
+    "query": "как удалить тренировочный блок по id и кому это разрешено?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_145",
+    "query": "which endpoint attaches an exercise to a training unit?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_146",
+    "query": "how does the API list the exercises inside a training unit?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_147",
+    "query": "как убрать упражнение из тренировочного блока через API?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_148",
+    "query": "how does the API look up a user by their e-mail address?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/user.py:fetch_user_by_email:70"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_149",
+    "query": "which endpoint registers a new user and how does it react to an already used e-mail?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/user.py:create_user:95"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_150",
+    "query": "как удалить учётную запись пользователя по идентификатору?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/user.py:delete_user:130"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_151",
+    "query": "how is a user account updated through the API?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/api/routes/user.py:update_user:175"
+    ],
+    "difficulty": "medium",
+    "category": "api"
+  },
+  {
+    "question_id": "g_152",
+    "query": "where are the settings for the development environment configured, including the env file?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/config.py:ContainerDevSettings:37"
+    ],
+    "difficulty": "medium",
+    "category": "config"
+  },
+  {
+    "question_id": "g_153",
+    "query": "где настраиваются параметры окружения для тестов и какой env-файл используется?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/config.py:ContainerTestSettings:44"
+    ],
+    "difficulty": "medium",
+    "category": "config"
+  },
+  {
+    "question_id": "g_154",
+    "query": "where is the local testing configuration and its env file defined?",
+    "language": "en",
+    "correct_chunk_ids": [
+      "gymhero/config.py:LocalTestSettings:51"
+    ],
+    "difficulty": "medium",
+    "category": "config"
+  },
+  {
+    "question_id": "g_155",
+    "query": "где находится универсальный базовый класс для операций чтения и записи в БД?",
+    "language": "ru",
+    "correct_chunk_ids": [
+      "gymhero/crud/base.py:CRUDRepository:20"
     ],
     "difficulty": "medium",
     "category": "db"
