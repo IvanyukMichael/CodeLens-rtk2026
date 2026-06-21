@@ -47,7 +47,28 @@ os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
 
 MODEL_NAME = "BAAI/bge-m3"
 DB_DIR = Path("chroma_db")
-COLLECTION = "codelens"
+
+# Две изолированные коллекции (строит index.py). Источник поиска управляет тем,
+# по какой(-им) из них идёт запрос:
+#   "gymhero" — только codelens_gymhero. По НЕЙ считается официальная метрика
+#               (P@5=0.800), поэтому она не зависит от размера общей базы.
+#   "all"     — gymhero + extra (вся база ≥80 файлов): мультипроектный поиск в UI.
+#   "extra"   — только codelens_extra (отладка/демо).
+# DEFAULT_SOURCE="gymhero" => predict.py и метрики по умолчанию считают на
+# официальной коллекции и невозможно случайно подмешать distractor.
+GYMHERO_COLLECTION = "codelens_gymhero"
+EXTRA_COLLECTION = "codelens_extra"
+DEFAULT_SOURCE = "gymhero"
+COLLECTION = GYMHERO_COLLECTION               # legacy-алиас для старых импортов
+
+# Какие коллекции опрашивать для каждого источника (порядок не важен — потом
+# мёрджим по релевантности).
+_SOURCE_COLLECTIONS = {
+    "gymhero": [GYMHERO_COLLECTION],
+    "extra": [EXTRA_COLLECTION],
+    "all": [GYMHERO_COLLECTION, EXTRA_COLLECTION],
+}
+
 ALPHA = 0.5                                   # вес запроса в mix (1-α — вес HyDE)
 HYDE_QUERY_CACHE = Path("cache/hyde_query_cache.json")
 
@@ -60,7 +81,8 @@ HYDE_QUERY_CACHE = Path("cache/hyde_query_cache.json")
 NEGATIVE_THRESHOLD = 60.0
 
 _MODEL = None
-_COLLECTION = None
+_CLIENT = None
+_COLLECTIONS = {}                             # {name: collection}, открываются лениво
 _HYDE_CACHE = None
 
 
@@ -81,18 +103,32 @@ def get_model():
     return _MODEL
 
 
-def get_collection():
-    """Коллекция ChromaDB `codelens`, открывается один раз на процесс."""
-    global _COLLECTION
-    if _COLLECTION is None:
+def _client():
+    global _CLIENT
+    if _CLIENT is None:
         import chromadb
-        client = chromadb.PersistentClient(path=str(DB_DIR))
-        _COLLECTION = client.get_collection(COLLECTION)
-    return _COLLECTION
+        _CLIENT = chromadb.PersistentClient(path=str(DB_DIR))
+    return _CLIENT
+
+
+def get_collection(name: str = GYMHERO_COLLECTION):
+    """Коллекция ChromaDB по имени, открывается один раз на процесс.
+    По умолчанию — официальная gymhero-коллекция."""
+    if name not in _COLLECTIONS:
+        _COLLECTIONS[name] = _client().get_collection(name)
+    return _COLLECTIONS[name]
+
+
+def available_sources() -> list[str]:
+    """Источники, для которых ВСЕ нужные коллекции реально существуют в базе.
+    Позволяет UI не предлагать «вся база», если extra-коллекция не построена."""
+    existing = {c.name for c in _client().list_collections()}
+    return [src for src, names in _SOURCE_COLLECTIONS.items()
+            if all(n in existing for n in names)]
 
 
 def warmup():
-    """Прогреть модель и коллекцию (для @st.cache_resource в app.py)."""
+    """Прогреть модель и официальную коллекцию (для @st.cache_resource в app.py)."""
     return get_model(), get_collection()
 
 
@@ -131,18 +167,28 @@ def _get_hyde(query: str):
     return text, False, None
 
 
-def search(query: str, top_k: int = 5, use_hyde: bool = True) -> dict:
+def search(query: str, top_k: int = 5, use_hyde: bool = True,
+           source: str = DEFAULT_SOURCE) -> dict:
     """Семантический поиск по коду. Возвращает dict с результатами, latency и
     флагами HyDE.
 
-    results[i] = {chunk_id, path, name, kind, start, end, code, docstring, relevance}
-    relevance — косинусная близость в процентах (0..100), отсортировано по убыванию.
+    source — область поиска: "gymhero" (официальная коллекция, метрика 0.800),
+    "all" (вся база ≥80 файлов: gymhero+extra), "extra". Официальный скоринг
+    (predict.py, страница метрик) использует "gymhero" => P@5 не зависит от
+    размера общей базы. Для "all" результаты двух коллекций мёрджатся по
+    релевантности (top-k из каждой достаточно для точного глобального top-k).
+
+    results[i] = {chunk_id, path, name, kind, start, end, code, docstring,
+    relevance, source}. relevance — косинусная близость в процентах (0..100),
+    отсортировано по убыванию.
     """
     model = get_model()
-    collection = get_collection()
+    if source not in _SOURCE_COLLECTIONS:
+        source = DEFAULT_SOURCE
+    target_names = list(_SOURCE_COLLECTIONS[source])
 
     out = {
-        "query": query, "top_k": top_k,
+        "query": query, "top_k": top_k, "source": source,
         "use_hyde_requested": use_hyde, "hyde_used": False,
         "hyde_from_cache": False, "hyde_text": None, "warning": None,
         "results": [],
@@ -179,24 +225,39 @@ def search(query: str, top_k: int = 5, use_hyde: bool = True) -> dict:
         qvec = embs[0]
     out["latency"]["embed_ms"] = (time.perf_counter() - t0) * 1000
 
-    # --- поиск в ChromaDB ---
+    # --- поиск в ChromaDB (одна или несколько коллекций) ---
     t0 = time.perf_counter()
-    res = collection.query(
-        query_embeddings=[qvec.tolist()], n_results=top_k,
-        include=["metadatas", "distances"])
+    qlist = qvec.tolist()
+    merged = []                                   # (dist, cid, meta) по всем коллекциям
+    missing = []
+    for name in target_names:
+        try:
+            col = get_collection(name)
+        except Exception:
+            missing.append(name)                  # коллекция не построена — пропускаем
+            continue
+        res = col.query(query_embeddings=[qlist], n_results=top_k,
+                        include=["metadatas", "distances"])
+        merged.extend(zip(res["distances"][0], res["ids"][0], res["metadatas"][0]))
+    # глобальный top-k по косинусной дистанции (меньше = релевантнее). Взять top-k
+    # из каждой коллекции достаточно: вне топ-k своей коллекции чанк не может
+    # попасть в глобальный топ-k (слотов всего k).
+    merged.sort(key=lambda r: r[0])
     out["latency"]["search_ms"] = (time.perf_counter() - t0) * 1000
 
-    ids = res["ids"][0]
-    dists = res["distances"][0]
-    metas = res["metadatas"][0]
-    for cid, dist, m in zip(ids, dists, metas):
+    if missing:
+        note = (f"коллекции не найдены: {', '.join(missing)} — постройте их "
+                f"`python index.py`")
+        out["warning"] = (out["warning"] + " | " + note) if out["warning"] else note
+
+    for dist, cid, m in merged[:top_k]:
         rel = max(0.0, min(100.0, (1.0 - dist) * 100.0))   # space=cosine
         out["results"].append({
             "chunk_id": cid,
             "path": m["path"], "name": m["name"], "kind": m["kind"],
             "start": m["start_line"], "end": m["end_line"],
             "code": m["code"], "docstring": m.get("docstring", ""),
-            "relevance": rel,
+            "relevance": rel, "source": m.get("source", ""),
         })
 
     out["latency"]["total_ms"] = (time.perf_counter() - t_all) * 1000
@@ -209,21 +270,24 @@ def _cli() -> None:
     ap.add_argument("query", nargs="*", help="текст запроса")
     ap.add_argument("-k", "--top-k", type=int, default=5)
     ap.add_argument("--no-hyde", action="store_true")
+    ap.add_argument("--source", choices=list(_SOURCE_COLLECTIONS), default=DEFAULT_SOURCE,
+                    help="область поиска: gymhero (офиц.) / all (вся база) / extra")
     args = ap.parse_args()
 
     query = " ".join(args.query) or "как создаётся токен доступа"
-    r = search(query, top_k=args.top_k, use_hyde=not args.no_hyde)
+    r = search(query, top_k=args.top_k, use_hyde=not args.no_hyde, source=args.source)
 
     if r["warning"]:
         print(f"[!] {r['warning']}")
     lat = r["latency"]
-    print(f"Запрос: {query!r}  (HyDE={'on' if r['hyde_used'] else 'off'}"
+    print(f"Запрос: {query!r}  (source={r['source']}, HyDE={'on' if r['hyde_used'] else 'off'}"
           f"{', cache' if r['hyde_from_cache'] else ''})")
     print(f"latency: hyde={lat['hyde_ms']:.0f} ms, embed={lat['embed_ms']:.0f} ms, "
           f"search={lat['search_ms']:.1f} ms, total={lat['total_ms']:.0f} ms")
     print("-" * 78)
     for i, hit in enumerate(r["results"], 1):
-        print(f"{i}. [{hit['relevance']:5.1f}%] {hit['chunk_id']}")
+        src = f" «{hit['source']}»" if hit.get("source") else ""
+        print(f"{i}. [{hit['relevance']:5.1f}%] {hit['chunk_id']}{src}")
         print(f"   {hit['kind']}  {hit['path']}  L{hit['start']}-{hit['end']}")
 
 

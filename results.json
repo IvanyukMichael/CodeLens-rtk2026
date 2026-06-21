@@ -116,7 +116,7 @@
       "gymhero/crud/training_plan.py:TrainingPlanCRUD.add_training_unit_to_training_plan:11",
       "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
       "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
-      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36"
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.get_training_units_in_training_plan:62"
     ]
   },
   {

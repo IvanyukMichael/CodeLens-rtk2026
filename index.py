@@ -2,7 +2,7 @@
 
 Запуск (одна из двух обязательных команд продукта, см. §8 CLAUDE.md):
 
-    python index.py                  # вся база по умолчанию: gymhero + corpus_extra
+    python index.py                  # строит ОБЕ коллекции: gymhero + доп.корпус
     python index.py <папка> [...]    # индексировать только указанные корни
 
 Пайплайн (строит ТОЛЬКО базу; HyDE и сам поиск — в search-модуле для app.py):
@@ -10,12 +10,17 @@
     обход .py  ->  extract_chunks (AST, §3)  ->  enrich (§4.1, общий enrich.py)
         ->  bge-m3 embed (normalize=True)  ->  ChromaDB (persistent, chroma_db/)
 
-Несколько корней (требование ТЗ «база ≥80 файлов»). relative_path в chunk_id
-считается ОТ КАЖДОГО корня по отдельности, поэтому gymhero сохраняет точные
-chunk_id вида `gymhero/...` (калибровка 30/30), а доп. корпус получает
-собственные префиксы (`click/...`, `rich/...`) — пересечений нет. Официальная
-метрика считается только по gymhero; доп. репозитории — это размер базы,
-масштаб и «отвлекающие» чанки для честной нагрузки на ретрив.
+ДВЕ ИЗОЛИРОВАННЫЕ КОЛЛЕКЦИИ (ключевое архитектурное решение, см. REPORT
+«Режимы индексации»): gymhero идёт в codelens_gymhero, доп. репозитории — в
+codelens_extra. Официальная метрика P@5 считается СТРОГО по codelens_gymhero,
+поэтому она не зависит от размера общей базы и не подвержена cross-project
+dilution (доменно-близкие чанки из другого проекта не вытесняют эталонные
+gymhero-ответы из топ-5; см. REPORT, замер A). Требование ТЗ «база ≥80 файлов»
+закрывается суммой обеих коллекций (168 файлов).
+
+relative_path в chunk_id считается ОТ КАЖДОГО корня по отдельности, поэтому
+gymhero сохраняет точные chunk_id вида `gymhero/...` (калибровка 30/30), а доп.
+корпус получает собственные префиксы (`click/...`, `rich/...`) — пересечений нет.
 
 Хранилище — ChromaDB (требование ТЗ), space=cosine. ID документа = chunk_id;
 в метаданных лежит всё, что нужно UI: path, name, kind, start_line, end_line,
@@ -50,7 +55,18 @@ os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
 
 MODEL_NAME = "BAAI/bge-m3"
 DB_DIR = Path("chroma_db")
-COLLECTION = "codelens"
+
+# ДВЕ ИЗОЛИРОВАННЫЕ КОЛЛЕКЦИИ (см. REPORT «Режимы индексации»):
+#   gymhero  -> codelens_gymhero  — официальный корпус, точные chunk_id, эталон
+#                                   метрики. По НЕЙ считается P@5 (офиц.15 / расш.).
+#   доп.репо -> codelens_extra    — click/rich + JS/Java-демо. Это размер базы
+#                                   (≥80 файлов ТЗ) и мультипроектный поиск в UI.
+# gymhero и distractor НИКОГДА не лежат в одной коллекции: официальная метрика
+# 0.800 считается строго по codelens_gymhero и НЕ ЗАВИСИТ от размера общей базы.
+# Это устраняет cross-project dilution на эталонных вопросах (см. REPORT, замер A).
+GYMHERO_COLLECTION = "codelens_gymhero"
+EXTRA_COLLECTION = "codelens_extra"
+
 ADD_BATCH = 1000          # размер батча при заливке в Chroma (хватает с запасом)
 TEST_QUERY = "как создаётся токен доступа"
 
@@ -60,10 +76,12 @@ TEST_QUERY = "как создаётся токен доступа"
 # пересчитываются автоматически. Если ВСЁ из кэша — модель bge-m3 даже не грузится.
 EMB_CACHE = Path("cache/index_embeddings.pkl")
 
-# Вся база по умолчанию (≥80 файлов): gymhero (официальный корпус, точные
-# chunk_id) + corpus_extra (click/rich, дальние по домену «отвлекающие» чанки)
-# + corpus_polyglot (демо второго языка: JS/Java через tree-sitter).
-DEFAULT_ROOTS = ["gymhero", "corpus_extra", "corpus_polyglot"]
+# Маршрутизация корней по коллекциям (см. выше). gymhero -> своя коллекция,
+# всё остальное -> extra. Так `python index.py` без аргументов строит ОБЕ
+# коллекции раздельно, а официальная gymhero-коллекция физически не может быть
+# затёрта distractor'ами (раньше DEFAULT_ROOTS сваливал всё в одну `codelens`).
+GYMHERO_ROOTS = ["gymhero"]
+EXTRA_ROOTS = ["corpus_extra", "corpus_polyglot"]
 
 # Расширения, считающиеся индексируемыми файлами (для счётчика «≥80 файлов»).
 CODE_EXTS = (".py", ".js", ".jsx", ".mjs", ".java")
@@ -153,9 +171,9 @@ def collect_chunks(roots: list[Path]) -> tuple[list[dict], int]:
     return chunks, n_files
 
 
-def build_index(roots: list[Path]):
-    """Строит коллекцию ChromaDB из всех .py под перечисленными корнями.
-    Возвращает (collection, model, chunks, n_files, client)."""
+def build_index(roots: list[Path], collection_name: str):
+    """Строит ОДНУ изолированную коллекцию ChromaDB из всех файлов под
+    перечисленными корнями. Возвращает (collection, model, chunks, n_files, client)."""
     print(f"[1/4] Извлекаю чанки из {', '.join(str(r) for r in roots)} (AST) ...")
     chunks, n_files = collect_chunks(roots)
     if not chunks:
@@ -167,16 +185,16 @@ def build_index(roots: list[Path]):
     docs = [enriched[c["chunk_id"]] for c in chunks]
     emb, model = embed_docs(docs)                     # кэш по содержимому; model=None если всё из кэша
 
-    print(f"[4/4] Пересоздаю коллекцию '{COLLECTION}' в {DB_DIR}/ ...")
+    print(f"[4/4] Пересоздаю коллекцию '{collection_name}' в {DB_DIR}/ ...")
     import chromadb
     DB_DIR.mkdir(parents=True, exist_ok=True)
     client = chromadb.PersistentClient(path=str(DB_DIR))
     try:                                              # идемпотентность: чистое пересоздание
-        client.delete_collection(COLLECTION)
+        client.delete_collection(collection_name)
     except Exception:
         pass
     collection = client.create_collection(
-        name=COLLECTION,
+        name=collection_name,
         metadata={"hnsw:space": "cosine", "model": MODEL_NAME},
     )
 
@@ -227,33 +245,70 @@ def smoke_query(collection, model, query: str, k: int = 3) -> None:
     print("-" * 78)
 
 
+def _is_gymhero_root(p: Path) -> bool:
+    """Корень относится к официальной gymhero-коллекции, только если это сама
+    папка gymhero. Любая другая папка (включая чужой репозиторий судьи) уходит
+    в codelens_extra — так официальная коллекция не может быть затёрта."""
+    return p.resolve().name == "gymhero"
+
+
+def _plan_jobs(args: list[str]) -> list[tuple[str, list[Path]]]:
+    """Маршрутизация корней по коллекциям. Без аргументов — обе коллекции из
+    стандартных корней; с аргументами — только те коллекции, в которые попали
+    переданные папки. Возвращает [(collection_name, [roots]), ...]."""
+    if args:
+        roots = [Path(a) for a in args if Path(a).exists()]
+        gym = [r for r in roots if _is_gymhero_root(r)]
+        extra = [r for r in roots if not _is_gymhero_root(r)]
+    else:
+        gym = [Path(r) for r in GYMHERO_ROOTS if Path(r).exists()]
+        extra = [Path(r) for r in EXTRA_ROOTS if Path(r).exists()]
+    jobs = []
+    if gym:
+        jobs.append((GYMHERO_COLLECTION, gym))
+    if extra:
+        jobs.append((EXTRA_COLLECTION, extra))
+    return jobs
+
+
 def main() -> None:
     args = sys.argv[1:]
-    roots = [Path(a) for a in args] if args else [Path(r) for r in DEFAULT_ROOTS]
-    roots = [r for r in roots if r.exists()]
-    if not roots:
-        missing = args or DEFAULT_ROOTS
-        print(f"Папки не найдены: {', '.join(map(str, missing))}")
+    jobs = _plan_jobs(args)
+    if not jobs:
+        target = args or (GYMHERO_ROOTS + EXTRA_ROOTS)
+        print(f"Папки не найдены: {', '.join(map(str, target))}")
         sys.exit(1)
 
+    built = []                                        # (collection, model, n_files, n_chunks)
     t0 = time.perf_counter()
-    collection, model, chunks, n_files, _client = build_index(roots)
+    for coll_name, roots in jobs:
+        print(f"\n### Коллекция '{coll_name}'  <-  {', '.join(str(r) for r in roots)}")
+        collection, model, _chunks, n_files, _client = build_index(roots, coll_name)
+        built.append((coll_name, collection, model, n_files, collection.count()))
     elapsed = time.perf_counter() - t0
 
-    n = collection.count()
+    total_files = sum(b[3] for b in built)
+    total_chunks = sum(b[4] for b in built)
     print("\n" + "=" * 78)
     print("ИНДЕКСАЦИЯ ЗАВЕРШЕНА")
-    print(f"  корни:            {', '.join(str(r.resolve()) for r in roots)}")
-    print(f"  файлов .py:       {n_files}")
-    print(f"  чанков в базе:    {n}")
-    print(f"  хранилище:        {DB_DIR.resolve()}  (коллекция '{COLLECTION}', space=cosine)")
+    for coll_name, _c, _m, n_files, n_chunks in built:
+        print(f"  коллекция {coll_name:18} файлов={n_files:4}  чанков={n_chunks:4}")
+    print(f"  ИТОГО по базе:    файлов={total_files} (≥80 ТЗ: "
+          f"{'OK' if total_files >= 80 else 'НЕ ВЫПОЛНЕНО'}),  чанков={total_chunks}")
+    print(f"  хранилище:        {DB_DIR.resolve()}  (space=cosine)")
     print(f"  модель:           {MODEL_NAME}")
     print(f"  время индексации: {elapsed:.1f} c")
+    print(f"  ВАЖНО:            официальный P@5 считается ТОЛЬКО по "
+          f"{GYMHERO_COLLECTION} (изоляция от distractor).")
     print("=" * 78)
 
-    if model is None:                                 # всё пришло из кэша — грузим bge-m3 для smoke-теста
+    # smoke-тест на gymhero-коллекции, если она строилась (иначе — на первой)
+    sc = next((b for b in built if b[0] == GYMHERO_COLLECTION), built[0])
+    coll_name, collection, model = sc[0], sc[1], sc[2]
+    if model is None:                                 # всё из кэша — грузим bge-m3 для smoke-теста
         from sentence_transformers import SentenceTransformer
         model = SentenceTransformer(MODEL_NAME, device=_device())
+    print(f"\nSmoke-тест по коллекции '{coll_name}':")
     smoke_query(collection, model, TEST_QUERY)
 
 

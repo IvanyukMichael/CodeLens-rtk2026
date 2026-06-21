@@ -53,13 +53,19 @@ def db_ready() -> bool:
 
 @st.cache_data(ttl=30, show_spinner=False)
 def corpus_overview() -> dict:
-    """Состав индексируемой базы прямо из ChromaDB (для вкладки Метрик).
-    Читает метаданные коллекции и считает файлы/чанки по источникам и языкам.
-    Фолбэк по `path` — чтобы корректно работать и на старой базе без полей
-    source/lang (тогда source = первый компонент пути, lang = python)."""
+    """Состав ВСЕЙ индексируемой базы прямо из ChromaDB (для вкладки Метрик).
+    Агрегирует ОБЕ коллекции (codelens_gymhero + codelens_extra), чтобы показать
+    требование ТЗ «≥80 файлов» по всей базе. Метрика P@5 при этом считается
+    отдельно — строго по gymhero-коллекции (см. ниже). Фолбэк по `path` — чтобы
+    работать и на старой базе без полей source/lang."""
     from collections import defaultdict
-    col = search.get_collection()
-    metas = col.get(include=["metadatas"]).get("metadatas") or []
+    metas = []
+    for name in (search.GYMHERO_COLLECTION, search.EXTRA_COLLECTION):
+        try:
+            col = search.get_collection(name)
+        except Exception:
+            continue                              # коллекция не построена — пропускаем
+        metas += col.get(include=["metadatas"]).get("metadatas") or []
 
     src_files, src_chunks, lang_chunks, all_files = (
         defaultdict(set), defaultdict(int), defaultdict(int), set())
@@ -85,7 +91,9 @@ def run_eval(questions: list[dict], use_hyde: bool, progress=None) -> list[dict]
     per_q = []
     n = len(questions)
     for i, q in enumerate(questions):
-        r = search.search(q["query"], top_k=5, use_hyde=use_hyde)
+        # ОФИЦИАЛЬНАЯ метрика всегда по gymhero-коллекции (эталонные chunk_id
+        # размечены только по gymhero) — не зависит от селектора источника в UI.
+        r = search.search(q["query"], top_k=5, use_hyde=use_hyde, source="gymhero")
         top5 = [h["chunk_id"] for h in r["results"]]
         per_q.append({**q, "score": score_question(top5, q["correct_chunk_ids"])})
         if progress is not None:
@@ -119,6 +127,24 @@ with st.sidebar:
     st.caption("Семантический поиск по Python-коду · bge-m3 + enriched + HyDE-mix")
 
     st.subheader("Параметры")
+
+    # Источник поиска: gymhero (официальная метрика 0.800) vs вся база (≥80 файлов).
+    SRC_GYM = "Только gymhero (офиц. 0.800)"
+    SRC_ALL = "Вся база ≥80 файлов"
+    _src_opts = [SRC_GYM]
+    if "all" in search.available_sources():
+        _src_opts.append(SRC_ALL)
+    src_label = st.radio(
+        "Область поиска", _src_opts,
+        help="«Только gymhero» — официальный корпус, по нему считается метрика "
+             "(P@5=0.800). «Вся база» — gymhero + открытые репозитории (click/rich) "
+             "+ JS/Java (≥80 файлов ТЗ), мультипроектный поиск. Метрика на вкладке "
+             "«Метрики» всегда считается по gymhero независимо от этого выбора.")
+    search_source = "all" if src_label == SRC_ALL else "gymhero"
+    if len(_src_opts) == 1:
+        st.caption("ℹ️ Доп. коллекция не построена — доступен только gymhero. "
+                   "Постройте всю базу: `python index.py`")
+
     _ollama = ollama_up()
     use_hyde = st.toggle(
         "HyDE", value=_ollama,
@@ -166,10 +192,11 @@ def render_results(res: dict) -> None:
             top = st.columns([5, 2])
             with top[0]:
                 icon = "🏛️" if hit["kind"] == "class" else "🔧"
+                badge = f" · 📦 {hit['source']}" if hit.get("source") else ""
                 st.markdown(
                     f"**{i}. `{hit['path']}` → `{hit['name']}`**")
                 st.caption(
-                    f"{icon} {hit['kind']} · строки {hit['start']}–{hit['end']} · "
+                    f"{icon} {hit['kind']} · строки {hit['start']}–{hit['end']}{badge} · "
                     f"`{hit['chunk_id']}`")
             with top[1]:
                 st.progress(min(1.0, hit["relevance"] / 100.0),
@@ -207,7 +234,8 @@ with tab_search:
 
     if submitted and query.strip():
         with st.spinner("Поиск…"):
-            res = search.search(query, top_k=top_k, use_hyde=use_hyde)
+            res = search.search(query, top_k=top_k, use_hyde=use_hyde,
+                                source=search_source)
         st.session_state["last_search"] = res
     elif submitted:
         st.info("Введите запрос.")
@@ -249,7 +277,8 @@ with tab_chat:
 
     if chat_submitted and chat_query.strip():
         with st.spinner("Поиск фрагментов…"):
-            cres = search.search(chat_query, top_k=chat.MAX_CHUNKS, use_hyde=use_hyde)
+            cres = search.search(chat_query, top_k=chat.MAX_CHUNKS, use_hyde=use_hyde,
+                                 source=search_source)
         results = cres["results"]
         if cres.get("warning"):
             st.info("⚠️ " + cres["warning"])
@@ -282,9 +311,11 @@ with tab_chat:
 
 with tab_metrics:
     st.subheader("📦 Состав индексируемой базы")
-    st.caption("Живые числа из ChromaDB. Требование ТЗ — база ≥ 80 файлов. "
-               "Поиск идёт по всему корпусу: gymhero (официальный) + открытые репозитории "
-               "(click, rich) + JS/Java-демокорпус.")
+    st.caption("Живые числа из ChromaDB по ОБЕИМ коллекциям. Требование ТЗ — база "
+               "≥ 80 файлов. База разнесена на две изолированные коллекции: "
+               "`codelens_gymhero` (официальный корпус, по нему метрика) и "
+               "`codelens_extra` (click/rich + JS/Java — размер базы и "
+               "мультипроектный поиск в режиме «Вся база»).")
     ov = corpus_overview()
     c = st.columns(3)
     c[0].metric("Файлов", ov["n_files"],
@@ -314,7 +345,10 @@ with tab_metrics:
 
     st.subheader("Precision@5 (официальный score.py)")
     st.caption("Живой прогон: для каждого вопроса делаем поиск текущим ядром и "
-               "считаем P@5 тем же score_question, что у организаторов. "
+               "считаем P@5 тем же score_question, что у организаторов. Метрика "
+               "считается **строго по gymhero-коллекции** (эталонные chunk_id "
+               "размечены только по gymhero) — независимо от выбора «Область поиска» "
+               "в сайдбаре. Поэтому P@5 не зависит от размера общей базы. "
                f"Режим HyDE берётся из сайдбара (сейчас: {'вкл' if use_hyde else 'выкл'}).")
 
     def _count(path: Path, default: int) -> int:
