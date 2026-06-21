@@ -24,6 +24,7 @@ from score import score_question
 
 OFFICIAL_EVAL = Path("eval_questions.json")
 COMBINED_EVAL = Path("eval/eval_combined.json")
+RESULTS_DIR = Path("results")
 
 st.set_page_config(page_title="CodeLens — семантический поиск по коду",
                    page_icon="🔍", layout="wide")
@@ -193,7 +194,8 @@ def render_results(res: dict) -> None:
         st.warning(f"⚠️ Латентность {total_s:.2f} с > 3 с")
 
 
-tab_search, tab_chat, tab_metrics = st.tabs(["🔎 Поиск", "💬 Ответ (LLM)", "📊 Метрики"])
+tab_search, tab_chat, tab_metrics, tab_results = st.tabs(
+    ["🔎 Поиск", "💬 Ответ (LLM)", "📊 Метрики", "📈 Результаты исследования"])
 
 with tab_search:
     st.subheader("Поиск по коду")
@@ -366,3 +368,80 @@ with tab_metrics:
         st.dataframe(
             df.style.format({"P@5": "{:.3f}"}),
             use_container_width=True, hide_index=True)
+
+
+with tab_results:
+    st.subheader("📈 Результаты исследования (ablation)")
+    st.caption("Готовые таблицы из `results/*.csv` и графики. Read-only — ничего не считается "
+               "на лету. Каждая таблица помечена набором eval, на котором получена.")
+
+    def _fmt_df(df: pd.DataFrame):
+        floatcols = [c for c in df.columns if df[c].dtype.kind == "f"]
+        return df.style.format({c: "{:.3f}" for c in floatcols})
+
+    def show_table(fname: str, title: str, eval_label: str, script: str, note=None):
+        path = RESULTS_DIR / fname
+        st.markdown(f"**{title}**  ·  набор: _{eval_label}_")
+        if note:
+            st.caption(note)
+        if path.exists():
+            try:
+                st.dataframe(_fmt_df(pd.read_csv(path)),
+                             use_container_width=True, hide_index=True)
+            except Exception as e:
+                st.warning(f"Не удалось прочитать {fname}: {e}")
+        else:
+            st.info(f"Ещё не запущено — нет `{path}`. Сгенерировать: `python {script}`")
+        st.divider()
+
+    h = st.columns(3)
+    h[0].metric("P@5 · офиц. 15", "0.800")
+    h[1].metric("P@5 · расш. 71", "0.831")
+    h[2].metric("Прод-конфигурация", "bge-m3 + enriched + HyDE")
+    st.caption("Заголовочные числа боевой конфигурации (HyDE temp=0). Полная методология, "
+               "доверительные интервалы и выводы — в REPORT.md.")
+    st.divider()
+
+    st.markdown("### Путь модели и общая ablation")
+    show_table("ablation_models.csv", "Bake-off моделей (4 модели × raw/enriched)",
+               "официальные 15", "eval_runner.py --all")
+    show_table("ablation_full.csv", "Полная цепочка + подмножества + бутстрап значимости",
+               "71 (15 офиц. + 56 расш.)", "ablation_full.py")
+
+    st.markdown("### Рычаги ретрива (принятые и отклонённые)")
+    show_table("ablation_hyde.csv", "HyDE: base / pure / mix + α-свип  —  ✅ принят",
+               "официальные 15", "hyde.py")
+    show_table("ablation_rerank.csv", "Reranker bge-reranker-v2-m3  —  ❌ отклонён (в пределах шума)",
+               "официальные 15", "rerank.py")
+    show_table("ablation_hybrid.csv", "BM25-гибрид (RRF)  —  ❌ отклонён (оверфит на 15-q)",
+               "официальные 15", "hybrid.py")
+    show_table("ablation_hyde_multi.csv", "Multi-HyDE ×3  —  ❌ отклонён (нет прироста)",
+               "официальные 15", "hyde_multi.py")
+
+    st.markdown("### Приоритет 3.2 — новые рычаги (прогон на GPU / с ключами)")
+    show_table("ablation_rerank_jina.csv", "jina-reranker-v2 (код-tuned cross-encoder)",
+               "170 (15 + 155)", "exp_rerank_jina.py",
+               note="Запускать на CUDA. Принять/отклонить — по доверительному интервалу на 170.")
+    show_table("ablation_api_embedders.csv",
+               "API-эмбеддеры: Cohere embed-v4 / Voyage voyage-code-3",
+               "170 (15 + 155)", "exp_api_embedders.py",
+               note="Нужны ключи COHERE_API_KEY / VOYAGE_API_KEY. «Потолок» для отчёта, "
+                    "прод остаётся на локальной bge-m3.")
+
+    st.markdown("### Графики")
+    figs = [
+        ("fig_model_bakeoff.png", "Bake-off моделей"),
+        ("fig_p5_by_config.png", "P@5 по конфигурациям"),
+        ("fig_ru_vs_en.png", "P@5: русский vs английский"),
+    ]
+    cols = st.columns(len(figs))
+    shown = False
+    for col, (fname, cap) in zip(cols, figs):
+        p = RESULTS_DIR / fname
+        if p.exists():
+            col.image(str(p), caption=cap, use_container_width=True)
+            shown = True
+        else:
+            col.info(f"нет {fname}")
+    if not shown:
+        st.caption("Графики строятся в analysis.ipynb → results/*.png.")
