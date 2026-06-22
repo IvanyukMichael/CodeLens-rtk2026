@@ -1,0 +1,20 @@
+# CodeLens — список пользовательских репозиториев для пакетного добавления.
+#
+# По одной GitHub-ссылке на строку. Текст после '#' — комментарий.
+# Поддерживаются формы: https://github.com/owner/repo  (с .git и без, со слэшем).
+#
+# Добавить все из этого файла:
+#     python add_repo.py --file repos.txt
+# Один репозиторий:
+#     python add_repo.py https://github.com/owner/repo
+# Переиндексировать уже добавленные:
+#     python add_repo.py --file repos.txt --reindex
+#
+# Репозитории попадают в коллекцию codelens_extra (source=owner__repo, origin=user),
+# переживают `python index.py` и НИКОГДА не пишутся в gymhero-коллекцию.
+# Лимиты на репозиторий: ≤500 .py файлов и ≤50 МБ суммарно.
+#
+# Примеры (раскомментируйте нужные):
+# https://github.com/benjaminp/six
+# https://github.com/psf/requests
+# https://github.com/pallets/flask

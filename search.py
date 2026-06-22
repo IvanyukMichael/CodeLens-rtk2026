@@ -168,7 +168,7 @@ def _get_hyde(query: str):
 
 
 def search(query: str, top_k: int = 5, use_hyde: bool = True,
-           source: str = DEFAULT_SOURCE) -> dict:
+           source: str = DEFAULT_SOURCE, where: dict | None = None) -> dict:
     """Семантический поиск по коду. Возвращает dict с результатами, latency и
     флагами HyDE.
 
@@ -177,6 +177,12 @@ def search(query: str, top_k: int = 5, use_hyde: bool = True,
     (predict.py, страница метрик) использует "gymhero" => P@5 не зависит от
     размера общей базы. Для "all" результаты двух коллекций мёрджатся по
     релевантности (top-k из каждой достаточно для точного глобального top-k).
+
+    where — опц. metadata-фильтр ChromaDB, пробрасывается в collection.query без
+    изменений (напр. {"source": "owner__repo"} для поиска по конкретному
+    пользовательскому репозиторию во вкладке «Репозитории»). По умолчанию None —
+    поведение байт-в-байт прежнее, официальный путь source="gymhero" (predict.py,
+    вкладка «Метрики») его не использует и не затронут.
 
     results[i] = {chunk_id, path, name, kind, start, end, code, docstring,
     relevance, source}. relevance — косинусная близость в процентах (0..100),
@@ -236,7 +242,7 @@ def search(query: str, top_k: int = 5, use_hyde: bool = True,
         except Exception:
             missing.append(name)                  # коллекция не построена — пропускаем
             continue
-        res = col.query(query_embeddings=[qlist], n_results=top_k,
+        res = col.query(query_embeddings=[qlist], n_results=top_k, where=where,
                         include=["metadatas", "distances"])
         merged.extend(zip(res["distances"][0], res["ids"][0], res["metadatas"][0]))
     # глобальный top-k по косинусной дистанции (меньше = релевантнее). Взять top-k

@@ -29,7 +29,11 @@ docstring, code, enriched_text, source (репозиторий-источник)
 на стороне запроса) — здесь мы эмбеддим РОВНО тот же enriched-текст, что в
 экспериментах, чтобы база была байт-в-байт совместима с метрикой.
 
-Идемпотентность: повторный запуск пересоздаёт коллекцию с нуля (без дублей).
+Идемпотентность: повторный запуск пересоздаёт gymhero-коллекцию с нуля (без
+дублей). Для codelens_extra пересоздаётся только ВСТРОЕННЫЙ корпус — добавленные
+через вкладку «Репозитории» пользовательские репозитории (origin="user")
+переживают `python index.py` и управляются отдельно (add_repo.py). См.
+_reset_for_builtin.
 """
 
 import sys
@@ -171,6 +175,41 @@ def collect_chunks(roots: list[Path]) -> tuple[list[dict], int]:
     return chunks, n_files
 
 
+def _reset_for_builtin(client, collection_name: str):
+    """Готовит коллекцию к перезаписи ВСТРОЕННЫМ корпусом и возвращает её.
+
+    Граница владения (вариант B изоляции): коллекция codelens_extra может
+    содержать пользовательские репозитории (origin="user"), добавленные через
+    вкладку «Репозитории»/add_repo.py. Поэтому для extra мы НЕ удаляем коллекцию
+    целиком, а чистим только встроенные чанки (origin != "user") по их id —
+    пользовательские репозитории ПЕРЕЖИВАЮТ `python index.py`. Старые чанки без
+    поля origin трактуются как встроенные (удаляются), что корректно мигрирует
+    базу, построенную прошлой версией индексатора.
+
+    Для gymhero (и любой другой коллекции) — прежнее чистое пересоздание: там
+    user-чанков нет по инварианту изоляции, а официальная метрика требует
+    байт-в-байт детерминированной перестройки."""
+    meta = {"hnsw:space": "cosine", "model": MODEL_NAME}
+    if collection_name != EXTRA_COLLECTION:
+        try:                                          # идемпотентность: чистое пересоздание
+            client.delete_collection(collection_name)
+        except Exception:
+            pass
+        return client.create_collection(name=collection_name, metadata=meta)
+
+    col = client.get_or_create_collection(name=collection_name, metadata=meta)
+    got = col.get(include=["metadatas"])
+    ids = got.get("ids") or []
+    metas = got.get("metadatas") or []
+    builtin_ids = [i for i, m in zip(ids, metas) if (m or {}).get("origin") != "user"]
+    for s in range(0, len(builtin_ids), ADD_BATCH):
+        col.delete(ids=builtin_ids[s:s + ADD_BATCH])
+    n_user = len(ids) - len(builtin_ids)
+    if n_user:
+        print(f"      сохранено пользовательских чанков (origin=user): {n_user}")
+    return col
+
+
 def build_index(roots: list[Path], collection_name: str):
     """Строит ОДНУ изолированную коллекцию ChromaDB из всех файлов под
     перечисленными корнями. Возвращает (collection, model, chunks, n_files, client)."""
@@ -189,14 +228,7 @@ def build_index(roots: list[Path], collection_name: str):
     import chromadb
     DB_DIR.mkdir(parents=True, exist_ok=True)
     client = chromadb.PersistentClient(path=str(DB_DIR))
-    try:                                              # идемпотентность: чистое пересоздание
-        client.delete_collection(collection_name)
-    except Exception:
-        pass
-    collection = client.create_collection(
-        name=collection_name,
-        metadata={"hnsw:space": "cosine", "model": MODEL_NAME},
-    )
+    collection = _reset_for_builtin(client, collection_name)
 
     ids = [c["chunk_id"] for c in chunks]
     metadatas = [{
@@ -210,6 +242,7 @@ def build_index(roots: list[Path], collection_name: str):
         "enriched_text": enriched[c["chunk_id"]],
         "source": _source_of(c["path"]),             # gymhero / click / rich (для UI и scoped)
         "lang": c.get("lang", "python"),             # python (AST) / javascript / java (tree-sitter)
+        "origin": "builtin",                         # встроенный корпус; user-репо помечены "user"
     } for c in chunks]
 
     for s in range(0, len(ids), ADD_BATCH):

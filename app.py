@@ -18,6 +18,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+import add_repo
 import chat
 import search
 from score import score_question
@@ -221,8 +222,9 @@ def render_results(res: dict) -> None:
         st.warning(f"⚠️ Латентность {total_s:.2f} с > 3 с")
 
 
-tab_search, tab_chat, tab_metrics, tab_results = st.tabs(
-    ["🔎 Поиск", "💬 Ответ (LLM)", "📊 Метрики", "📈 Результаты исследования"])
+tab_search, tab_chat, tab_metrics, tab_results, tab_repos = st.tabs(
+    ["🔎 Поиск", "💬 Ответ (LLM)", "📊 Метрики", "📈 Результаты исследования",
+     "📦 Репозитории"])
 
 with tab_search:
     st.subheader("Поиск по коду")
@@ -481,3 +483,162 @@ with tab_results:
             col.info(f"нет {fname}")
     if not shown:
         st.caption("Графики строятся в analysis.ipynb → results/*.png.")
+
+
+# ─────────────────────────── вкладка «Репозитории» ──────────────────────────────
+# Песочница: управление пользовательскими репозиториями + поиск по выбранному репо.
+# Полностью изолирована от gymhero — пишет и ищет СТРОГО в codelens_extra
+# (source=<owner__repo>, origin="user"). Официальная метрика (вкладки Поиск/Метрики)
+# не затрагивается: тот же search()-движок, но с source="extra" + where по репо.
+_STAGE_LABELS = {
+    "clone": "Клонирование репозитория…", "limits": "Проверка лимитов…",
+    "parse": "Парсинг .py (AST)…", "enrich": "Обогащение чанков…",
+    "embed": "Эмбеддинги (bge-m3)…", "write": "Запись в ChromaDB (codelens_extra)…",
+    "done": "Готово",
+}
+
+
+def _index_repo_with_status(url: str, reindex: bool) -> dict:
+    """Запускает индексацию репо с живым прогрессом в st.status (не «висит молча»)."""
+    with st.status("Индексация репозитория…", expanded=True) as status:
+        def _prog(stage: str, detail: str = "") -> None:
+            label = _STAGE_LABELS.get(stage, stage)
+            status.update(label=label)
+            st.write(f"• {label} {detail}".rstrip())
+        res = add_repo.index_repo(url, reindex=reindex, progress=_prog)
+        status.update(label="Готово", state="complete")
+    return res
+
+
+with tab_repos:
+    st.subheader("📦 Пользовательские репозитории (песочница)")
+    st.caption(
+        "Добавьте публичный GitHub-репозиторий — он индексируется тем же ядром "
+        "(extract_chunks + enrich + bge-m3) в изолированную коллекцию "
+        "`codelens_extra` с тегами `source=owner__repo`, `origin=user`. Официальная "
+        "метрика gymhero (P@5 = 0.800) и вкладки «Поиск»/«Метрики» этим не "
+        "затрагиваются — поиск здесь идёт строго по выбранному репозиторию. "
+        "Добавленные репозитории переживают `python index.py`.")
+
+    # ── A. Добавление ────────────────────────────────────────────────────────
+    st.markdown("#### ➕ Добавить репозиторий")
+    with st.form("add_repo_form"):
+        repo_url = st.text_input(
+            "Ссылка на GitHub-репозиторий",
+            placeholder="https://github.com/owner/repo")
+        reindex = st.checkbox("Переиндексировать, если уже добавлен", value=False,
+                              help="Иначе повторное добавление того же репо будет "
+                                   "пропущено как дубль.")
+        add_submitted = st.form_submit_button("Добавить и проиндексировать",
+                                              type="primary")
+
+    if add_submitted and repo_url.strip():
+        try:
+            res = _index_repo_with_status(repo_url, reindex)
+            if res["status"] == "duplicate":
+                st.warning(
+                    f"⚠️ Репозиторий **{res['repo_name']}** уже добавлен "
+                    f"({res['n_chunks']} чанков). Отметьте «Переиндексировать», "
+                    f"чтобы обновить, либо удалите его ниже.")
+            else:
+                verb = "переиндексирован" if res["status"] == "reindexed" else "добавлен"
+                st.success(
+                    f"✅ Репозиторий **{res['repo_name']}** {verb}: файлов "
+                    f"{res.get('n_files', '?')}, чанков {res['n_chunks']} "
+                    f"(способ: {res.get('fetch')}).")
+            corpus_overview.clear()        # обновить «состав базы» во вкладке «Метрики»
+        except add_repo.RepoError as e:    # ожидаемая проблема — понятный текст, не краш
+            st.error(f"❌ {e}")
+        except Exception as e:             # непредвиденное — тоже не роняем вкладку
+            st.error(f"❌ Непредвиденная ошибка: {type(e).__name__}: {e}")
+    elif add_submitted:
+        st.info("Введите ссылку на репозиторий.")
+
+    st.divider()
+
+    # ── B. Список добавленных + удаление по одному ───────────────────────────
+    st.markdown("#### 📚 Добавленные репозитории")
+    try:
+        user_repos = add_repo.list_user_repos()
+    except Exception as e:
+        user_repos = []
+        st.warning(f"Не удалось прочитать список репозиториев: {e}")
+
+    if not user_repos:
+        st.caption("Пока ничего не добавлено. Для пакетного добавления заранее можно "
+                   "положить ссылки в `repos.txt` и выполнить "
+                   "`python add_repo.py --file repos.txt`.")
+    else:
+        for r in user_repos:
+            cols = st.columns([5, 2, 2])
+            cols[0].markdown(f"**{r['repo_name']}**  \n`{r['url']}`")
+            cols[1].metric("Чанков", r["n_chunks"])
+            if cols[2].button("🗑 Удалить", key=f"del_{r['repo_name']}",
+                              help="Удаляет только чанки этого репозитория (по source)."):
+                try:
+                    n = add_repo.remove_repo(r["repo_name"])
+                    st.success(f"Удалён **{r['repo_name']}** ({n} чанков).")
+                except Exception as e:
+                    st.error(f"Не удалось удалить: {e}")
+                corpus_overview.clear()
+                st.session_state.pop("repo_search", None)
+                st.rerun()
+
+    st.divider()
+
+    # ── C. Поиск по выбранному репозиторию ───────────────────────────────────
+    st.markdown("#### 🔍 Поиск по репозиторию")
+    if not user_repos:
+        st.caption("Добавьте репозиторий выше, чтобы искать по нему.")
+    else:
+        names = [r["repo_name"] for r in user_repos]
+        sel = st.selectbox("Репозиторий для поиска", names, key="repo_select")
+        repo_llm = st.toggle(
+            "LLM-ответ по найденному", value=False, key="repo_llm",
+            help="Собрать связный ответ локальной LLM (Ollama · qwen2.5-coder:7b) "
+                 "по найденным фрагментам выбранного репозитория.")
+        with st.form("repo_search_form"):
+            repo_query = st.text_input(
+                "Запрос (RU или EN)", key="repo_query",
+                placeholder="напр.: how is configuration loaded  /  где обрабатываются ошибки")
+            repo_submitted = st.form_submit_button("🔎 Найти", type="primary")
+
+        if repo_submitted and repo_query.strip():
+            with st.spinner("Поиск…"):
+                rres = search.search(repo_query, top_k=top_k, use_hyde=use_hyde,
+                                     source="extra", where={"source": sel})
+            st.session_state["repo_search"] = {
+                "res": rres, "repo": sel, "query": repo_query, "llm": repo_llm}
+        elif repo_submitted:
+            st.info("Введите запрос.")
+
+        rs = st.session_state.get("repo_search")
+        if rs and rs["repo"] == sel:                # не показывать выдачу от другого репо
+            if rs["llm"]:
+                results = rs["res"]["results"]
+                if rs["res"].get("warning"):
+                    st.info("⚠️ " + rs["res"]["warning"])
+                if not results:
+                    st.info("Ничего не найдено.")
+                else:
+                    best = max(h["relevance"] for h in results)
+                    if best < search.NEGATIVE_THRESHOLD:
+                        st.error(
+                            f"🚫 Релевантного кода не найдено (лучшая релевантность "
+                            f"{best:.0f}% < {search.NEGATIVE_THRESHOLD:.0f}%). "
+                            f"Вероятно, такой функциональности нет в этом репозитории.")
+                    if ollama_up():
+                        st.markdown("#### 🤖 Ответ")
+                        try:
+                            with st.spinner("Генерация ответа (Ollama)…"):
+                                st.write_stream(
+                                    chat.ollama_chat_stream(rs["query"], results))
+                        except Exception as e:
+                            st.warning(f"Ollama не ответила ({type(e).__name__}). "
+                                       f"Показаны только фрагменты.")
+                    else:
+                        st.warning("🔴 Ollama недоступна — показаны только фрагменты.")
+                    st.markdown("#### 📎 Источники (найденные фрагменты)")
+                    render_fragments_compact(results)
+            else:
+                render_results(rs["res"])
