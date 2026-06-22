@@ -1,0 +1,6 @@
+[server]
+# Отключаем file-watcher: он рекурсивно инспектирует ленивые модули
+# transformers.models.*.image_processing_* → тянет torchvision (его в проекте нет,
+# мы используем только текстовые эмбеддинги bge-m3) → стена ModuleNotFoundError в консоли.
+# Это шум воркера, не ошибка приложения. См. HANDOFF §5.
+fileWatcherType = "none"

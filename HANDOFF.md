@@ -209,6 +209,11 @@ streamlit run app.py                           # UI на http://localhost:8501
    robustness-агрегат, не headline. Официальных 15 и исходных 56 (`g_01..g_56`, уникальны) это **не
    касается** — headline и срезы считаем на них. Файл сейчас НЕ дедуплицируем (числа в REPORT уже
    посчитаны на нём, не сдвигаем задним числом) — **дедуп в backlog** (см. §6).
+8. **`torchvision`-шум в консоли `streamlit run app.py`.** File-watcher Streamlit рекурсивно
+   инспектирует ленивые vision-модули `transformers.models.*.image_processing_*` → стена
+   `ModuleNotFoundError: No module named 'torchvision'`. Это шум воркера, не ошибка: torchvision
+   проекту не нужен (только текстовые эмбеддинги bge-m3). Отключён через
+   `.streamlit/config.toml` → `[server] fileWatcherType = "none"` (без новых зависимостей).
 
 ---
 
