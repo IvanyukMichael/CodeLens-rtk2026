@@ -6,7 +6,7 @@
   🔎 Поиск    — запрос RU/EN, тумблер HyDE, top-K, карточки с подсветкой кода,
                 relevance%, latency, обработка «негативных» запросов.
   📊 Метрики  — живой прогон Precision@5 (официальный score) на 15 вопросах
-                (опц. на расширенных 71) со срезами easy/medium/hard и ru/en.
+                (опц. на combined-269 как robustness) со срезами easy/medium/hard и ru/en.
 
 Поиск использует замороженное ядро search.py (bge-m3 + enriched + HyDE-mix).
 Модель bge-m3 и клиент ChromaDB кэшируются через @st.cache_resource.
@@ -358,13 +358,14 @@ with tab_metrics:
             return default
 
     n_off = _count(OFFICIAL_EVAL, 15)
-    n_comb = _count(COMBINED_EVAL, 71)
-    opt_off, opt_comb = f"Официальный ({n_off})", f"Расширенный ({n_comb})"
+    n_comb = _count(COMBINED_EVAL, 269)
+    opt_off, opt_comb = f"Официальный ({n_off})", f"Combined ({n_comb}) · robustness"
     eval_choice = st.radio(
         "Набор вопросов", [opt_off, opt_comb],
         horizontal=True,
-        help=f"Чемпионатная метрика считается на официальных {n_off}. Расширенный "
-             f"набор ({n_comb}) — наш для устойчивости оценки.")
+        help=f"Headline-метрика — официальные {n_off} (человеческая разметка). Combined "
+             f"({n_comb}) = 15 + синтетические — только robustness-проверка агрегата: "
+             f"LLM-вопросы инфлируют lexical-методы, поэтому в срезы их не берём.")
 
     if st.button("▶ Прогнать eval", type="primary"):
         path = OFFICIAL_EVAL if eval_choice == opt_off else COMBINED_EVAL
@@ -429,18 +430,19 @@ with tab_results:
         st.divider()
 
     h = st.columns(3)
-    h[0].metric("P@5 · офиц. 15", "0.800")
-    h[1].metric("P@5 · расш. 71", "0.831")
+    h[0].metric("P@5 · офиц. 15 (headline)", "0.800")
+    h[1].metric("P@5 · combined-269", "0.890", help="robustness-агрегат (15 + 254 синтетических); "
+                "синтетика инфлирует lexical-методы, headline и срезы — на официальных 15")
     h[2].metric("Прод-конфигурация", "bge-m3 + enriched + HyDE")
-    st.caption("Заголовочные числа боевой конфигурации (HyDE temp=0). Полная методология, "
-               "доверительные интервалы и выводы — в REPORT.md.")
+    st.caption("Headline — 0.800 на официальных 15 (человеческая разметка). Combined-269 (0.890) — "
+               "только robustness. Полная методология, CI и выводы — в REPORT.md.")
     st.divider()
 
     st.markdown("### Путь модели и общая ablation")
     show_table("ablation_models.csv", "Bake-off моделей (4 модели × raw/enriched)",
                "официальные 15", "eval_runner.py --all")
     show_table("ablation_full.csv", "Полная цепочка + подмножества + бутстрап значимости",
-               "71 (15 офиц. + 56 расш.)", "ablation_full.py")
+               "269 (15 офиц. + 254 расш.)", "ablation_full.py")
 
     st.markdown("### Рычаги ретрива (принятые и отклонённые)")
     show_table("ablation_hyde.csv", "HyDE: base / pure / mix + α-свип  —  ✅ принят",

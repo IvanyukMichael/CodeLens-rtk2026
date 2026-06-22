@@ -1,0 +1,4 @@
+config,p5_ru,p5_en
+bge-m3 raw,0.6042,0.7143
++enriched,0.7083,0.8333
++HyDE-mix,0.7917,0.8095

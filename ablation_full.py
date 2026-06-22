@@ -1,9 +1,15 @@
-"""Полная ablation-цепочка на объединённом eval (15 официальных + 56 расширенных = 71).
+"""Полная ablation-цепочка на объединённом eval (15 официальных + N расширенных).
+
+База — gymhero (extract_repo, 155 чанков): harness строит эмбеддинги напрямую,
+НЕ читает ChromaDB, поэтому числа всегда на изолированной gymhero-коллекции и не
+зависят от размера общей базы (см. REPORT §2.5, §3). Авторитетна колонка
+p5_official15; combined-набор (p5_total) — проверка устойчивости (в нём 254
+LLM-сгенерированных вопроса искажают часть сигналов, см. REPORT §3.4/§4).
 
 Считаем per-question Precision@5 (через score.score_question — тот же скорер) для
 ключевых конфигураций, агрегируем по срезам (easy/medium/hard, ru/en) и по
-подмножествам (official_15 vs extended_56), пишем results/ablation_full.csv.
-Затем — оценка значимости лучшей пары (HyDE-mix vs enriched) парным бутстрапом.
+подмножествам (official vs extended), пишем results/ablation_full.csv. Затем —
+парный бутстрап значимости ключевых пар.
 
 Запуск:
     python ablation_full.py
@@ -76,7 +82,7 @@ def aggregate(top5_by_qid, questions):
         "p5_ru": mean(lambda q: q["language"] == "ru"),
         "p5_en": mean(lambda q: q["language"] == "en"),
         "p5_official15": mean(lambda q: q["subset"] == "official"),
-        "p5_extended56": mean(lambda q: q["subset"] == "extended"),
+        "p5_extended": mean(lambda q: q["subset"] == "extended"),
     }
     return row, sc
 
@@ -159,7 +165,7 @@ def main():
         rows.append({"config": name, **row})
 
     cols = ["config", "p5_total", "p5_easy", "p5_medium", "p5_hard", "p5_ru", "p5_en",
-            "p5_official15", "p5_extended56"]
+            "p5_official15", "p5_extended"]
     csv_path = RESULTS_DIR / "ablation_full.csv"
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
@@ -171,12 +177,12 @@ def main():
 
     print("\n" + "=" * 118)
     print(f"{'config':<32}{'P@5':>7}{'easy':>7}{'med':>7}{'hard':>7}{'ru':>7}{'en':>7}"
-          f"{'offic15':>9}{'ext56':>8}")
+          f"{'offic15':>9}{'ext':>8}")
     print("-" * 118)
     for r in rows:
         print(f"{r['config']:<32}{fmt(r['p5_total']):>7}{fmt(r['p5_easy']):>7}"
               f"{fmt(r['p5_medium']):>7}{fmt(r['p5_hard']):>7}{fmt(r['p5_ru']):>7}"
-              f"{fmt(r['p5_en']):>7}{fmt(r['p5_official15']):>9}{fmt(r['p5_extended56']):>8}")
+              f"{fmt(r['p5_en']):>7}{fmt(r['p5_official15']):>9}{fmt(r['p5_extended']):>8}")
     print("=" * 118)
 
     # === значимость: парный бутстрап разностей ===
@@ -191,7 +197,8 @@ def main():
                     ci=(lo, hi), changed=int((d != 0).sum()),
                     up=int((d > 0).sum()), down=int((d < 0).sum()))
 
-    print("\n=== Значимость (парный бутстрап, 71 вопрос; 1 вопрос ≈ %.4f) ===" % (1 / len(questions)))
+    print("\n=== Значимость (парный бутстрап, %d вопросов; 1 вопрос ≈ %.4f) ==="
+          % (len(questions), 1 / len(questions)))
     pairs = [
         ("bge-m3 + enriched + HyDE-mix", "bge-m3 + enriched"),          # главная пара
         ("bge-m3 + enriched", "bge-m3 raw"),                            # вклад enrichment
