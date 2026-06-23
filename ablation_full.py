@@ -82,7 +82,7 @@ def aggregate(top5_by_qid, questions):
         "p5_ru": mean(lambda q: q["language"] == "ru"),
         "p5_en": mean(lambda q: q["language"] == "en"),
         "p5_official15": mean(lambda q: q["subset"] == "official"),
-        "p5_extended": mean(lambda q: q["subset"] == "extended"),
+        "p5_synthetic": mean(lambda q: q["subset"] == "extended"),
     }
     return row, sc
 
@@ -165,7 +165,7 @@ def main():
         rows.append({"config": name, **row})
 
     cols = ["config", "p5_total", "p5_easy", "p5_medium", "p5_hard", "p5_ru", "p5_en",
-            "p5_official15", "p5_extended"]
+            "p5_official15", "p5_synthetic"]
     csv_path = RESULTS_DIR / "ablation_full.csv"
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
@@ -182,7 +182,7 @@ def main():
     for r in rows:
         print(f"{r['config']:<32}{fmt(r['p5_total']):>7}{fmt(r['p5_easy']):>7}"
               f"{fmt(r['p5_medium']):>7}{fmt(r['p5_hard']):>7}{fmt(r['p5_ru']):>7}"
-              f"{fmt(r['p5_en']):>7}{fmt(r['p5_official15']):>9}{fmt(r['p5_extended']):>8}")
+              f"{fmt(r['p5_en']):>7}{fmt(r['p5_official15']):>9}{fmt(r['p5_synthetic']):>8}")
     print("=" * 118)
 
     # === значимость: парный бутстрап разностей ===

@@ -446,25 +446,81 @@ with tab_results:
     show_table("ablation_full.csv", "Полная цепочка + подмножества + бутстрап значимости",
                "269 (15 офиц. + 254 расш.)", "ablation_full.py")
 
-    st.markdown("### Рычаги ретрива (принятые и отклонённые)")
+    st.markdown("### Принятые рычаги")
     show_table("ablation_hyde.csv", "HyDE: base / pure / mix + α-свип  —  ✅ принят",
                "официальные 15", "hyde.py")
-    show_table("ablation_rerank.csv", "Reranker bge-reranker-v2-m3  —  ❌ отклонён (в пределах шума)",
-               "официальные 15", "rerank.py")
-    show_table("ablation_hybrid.csv", "BM25-гибрид (RRF)  —  ❌ отклонён (оверфит на 15-q)",
-               "официальные 15", "hybrid.py")
-    show_table("ablation_hyde_multi.csv", "Multi-HyDE ×3  —  ❌ отклонён (нет прироста)",
-               "официальные 15", "hyde_multi.py")
 
-    st.markdown("### Приоритет 3.2 — новые рычаги (прогон на GPU / с ключами)")
-    show_table("ablation_rerank_jina.csv", "jina-reranker-v2 (код-tuned cross-encoder)",
-               "170 (15 + 155)", "exp_rerank_jina.py",
-               note="Запускать на CUDA. Принять/отклонить — по доверительному интервалу на 170.")
-    show_table("ablation_api_embedders.csv",
-               "API-эмбеддеры: Cohere embed-v4 / Voyage voyage-code-3",
-               "170 (15 + 155)", "exp_api_embedders.py",
-               note="Нужны ключи COHERE_API_KEY / VOYAGE_API_KEY. «Потолок» для отчёта, "
-                    "прод остаётся на локальной bge-m3.")
+    # ── Единая таблица отклонённых техник (формат REPORT §3.4) ──────────────────
+    # Раньше reranker / jina / hybrid / multi-HyDE показывались отдельными CSV, где
+    # ведущей была колонка p5_total (надута синтетикой), а официальная — спрятана.
+    # Несводимо и вводит в заблуждение. Сводим в ОДНУ таблицу с официальными 15
+    # как ведущей (жирной) колонкой — как в REPORT §3.4.
+    st.markdown("### Отклонённые техники")
+    st.caption(
+        "Единый формат REPORT §3.4. Ведущая колонка — **официальные 15** "
+        "(человеческая разметка = чемпионатная метрика). Синтетика — LLM-набор, "
+        "**155 уникальных (254 записи с повторами)**; надувает лексическую близость, "
+        "поэтому это robustness-индикатор, а решает официальная колонка. "
+        "Δ — относительно базы каждой техники (реранкеры — от enriched 0.767; "
+        "гибрид — от HyDE-mix 0.800; Multi-HyDE — от single-HyDE)."
+    )
+
+    rejected = pd.DataFrame([
+        ["bge-m3 + enriched (база)", 0.767, "0.837",          "—",      "референс"],
+        ["+ bge-reranker-v2-m3",     0.744, "0.927",          "−0.022", "❌ отклонён"],
+        ["+ jina-reranker-v2",       0.722, "0.935",          "−0.045", "❌ отклонён"],
+        ["+ BM25-гибрид (w=0.2)",    0.778, "≈ нейтр. (−0.009)", "−0.022", "❌ отклонён"],
+        ["+ Multi-HyDE ×3",          0.811, "0.821",          "−0.011", "❌ отклонён"],
+    ], columns=["техника", "P@5 офиц.15", "P@5 синтетика", "Δ офиц.15", "вердикт"])
+
+    def _hl_rejected(col):
+        # Ведущая колонка (официальные 15) — жирная, с тёмно-синей заливкой.
+        if col.name == "P@5 офиц.15":
+            return ["font-weight:bold; background-color:#15233f; color:#cfe3ff"] * len(col)
+        if col.name == "вердикт":
+            return ["color:#ff9a9a" if "отклон" in str(v) else "color:#9aa4b2" for v in col]
+        return [""] * len(col)
+
+    st.dataframe(
+        rejected.style.format({"P@5 офиц.15": "{:.3f}"}).apply(_hl_rejected, axis=0),
+        use_container_width=True, hide_index=True)
+    st.caption(
+        "**Вывод:** реранкеры (bge-reranker-v2-m3, jina-reranker-v2) дают прирост только "
+        "на синтетических вопросах — лексическая близость LLM-генерации к коду — и вредят "
+        "на человеческой разметке. BM25-гибрид отклонён по другой причине: вес подобран на "
+        "15 вопросах (оверфит), на held-out он ниже чистого dense. Multi-HyDE не даёт "
+        "прироста ни на одном наборе. Итог: ни одна техника не превосходит "
+        "bge-m3 + enriched + HyDE-mix на человеческой метрике (0.800); реранкинг отклонён "
+        "как класс."
+    )
+    st.caption(
+        "Синтетические числа сняты на разных снэпшотах набора (jina — 155, "
+        "bge-reranker — 254, Multi-HyDE — 56) и между строками строго не сопоставимы; "
+        "вывод держится на колонке официальных 15, единой для всех строк."
+    )
+
+    with st.expander("Таблицы по каждой технике"):
+        show_table("ablation_rerank.csv", "bge-reranker-v2-m3 (cross-encoder)",
+                   "официальные 15", "rerank.py")
+        show_table("ablation_rerank_jina.csv", "jina-reranker-v2 (код-tuned cross-encoder)",
+                   "офиц.15 + синтетика (155-снэпшот)", "exp_rerank_jina.py")
+        show_table("ablation_hybrid.csv", "BM25-гибрид (RRF)",
+                   "официальные 15", "hybrid.py")
+        show_table("ablation_hyde_multi.csv", "Multi-HyDE ×3",
+                   "офиц.15 + синтетика (56-снэпшот)", "hyde_multi.py")
+
+    # ── API-эмбеддеры: прогон не состоялся (403) ────────────────────────────────
+    # st.markdown("### API-эмбеддеры (потолок) — прогон не состоялся")
+    # st.warning(
+    #     "API-эмбеддеры **Cohere embed-v4 / Voyage voyage-code-3** недоступны в нашей сети "
+    #     "(403), прогон не состоялся; строка ниже — локальный референс bge-m3, прод остаётся "
+    #     "на локальной модели.",
+    #     icon="🚫")
+    # st.caption(
+    #     "Локальный референс (не сравнение): bge-m3 + enriched = **0.767** (офиц.15) / "
+    #     "0.837 (синтетика, 155 уникальных / 254 записи с повторами). Прод воспроизводим без "
+    #     "ключей (`COHERE_API_KEY` / `VOYAGE_API_KEY`)."
+    # )
 
     st.markdown("### Графики")
     figs = [

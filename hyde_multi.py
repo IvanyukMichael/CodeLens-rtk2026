@@ -111,7 +111,7 @@ def main():
             {"config": "hyde_mix_multi3", **row_m}]
 
     cols = ["config", "p5_total", "p5_easy", "p5_medium", "p5_hard", "p5_ru", "p5_en",
-            "p5_official15", "p5_extended56"]
+            "p5_official15", "p5_synthetic"]
     csv_path = RESULTS_DIR / "ablation_hyde_multi.csv"
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
@@ -129,7 +129,7 @@ def main():
     for r in rows:
         print(f"{r['config']:<18}{fmt(r['p5_total']):>7}{fmt(r['p5_easy']):>7}{fmt(r['p5_medium']):>7}"
               f"{fmt(r['p5_hard']):>7}{fmt(r['p5_ru']):>7}{fmt(r['p5_en']):>7}"
-              f"{fmt(r['p5_official15']):>9}{fmt(r['p5_extended56']):>8}")
+              f"{fmt(r['p5_official15']):>9}{fmt(r['p5_synthetic']):>8}")
     print("=" * 104)
 
     # парный бутстрап multi3 vs single
@@ -147,9 +147,9 @@ def main():
     # согласованность подмножеств (обобщаемость)
     print("\n=== согласованность official15 vs extended56 ===")
     for r in rows:
-        gap = r["p5_official15"] - r["p5_extended56"]
+        gap = r["p5_official15"] - r["p5_synthetic"]
         print(f"  {r['config']:<18} official={fmt(r['p5_official15'])}  "
-              f"extended={fmt(r['p5_extended56'])}  |gap|={abs(gap):.3f}")
+              f"extended={fmt(r['p5_synthetic'])}  |gap|={abs(gap):.3f}")
 
     print(f"\nCSV: {csv_path}")
 

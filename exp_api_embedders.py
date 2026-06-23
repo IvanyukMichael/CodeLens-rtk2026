@@ -71,8 +71,8 @@ def aggregate(top5_by_qid: dict, questions: list[dict]) -> dict:
         "p5_hard": mean(lambda q: q["difficulty"] == "hard"),
         "p5_ru": mean(lambda q: q["language"] == "ru"),
         "p5_en": mean(lambda q: q["language"] == "en"),
-        "p5_official": mean(lambda q: q.get("subset") == "official"),
-        "p5_extended": mean(lambda q: q.get("subset") == "extended"),
+        "p5_official15": mean(lambda q: q.get("subset") == "official"),
+        "p5_synthetic": mean(lambda q: q.get("subset") == "extended"),
     }
 
 
@@ -209,7 +209,7 @@ def main():
             return
 
     cols = ["config", "p5_total", "p5_easy", "p5_medium", "p5_hard", "p5_ru", "p5_en",
-            "p5_official", "p5_extended"]
+            "p5_official15", "p5_synthetic"]
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     csv_path = RESULTS_DIR / "ablation_api_embedders.csv"
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
@@ -227,7 +227,7 @@ def main():
     for r in rows:
         print(f"{r['config']:<40}{fmt(r.get('p5_total')):>7}{fmt(r.get('p5_easy')):>7}"
               f"{fmt(r.get('p5_medium')):>7}{fmt(r.get('p5_hard')):>7}{fmt(r.get('p5_ru')):>7}"
-              f"{fmt(r.get('p5_en')):>7}{fmt(r.get('p5_official')):>8}{fmt(r.get('p5_extended')):>8}")
+              f"{fmt(r.get('p5_en')):>7}{fmt(r.get('p5_official15')):>8}{fmt(r.get('p5_synthetic')):>8}")
     print("=" * 108)
     print(f"\nCSV: {csv_path}")
 

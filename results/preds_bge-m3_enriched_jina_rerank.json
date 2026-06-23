@@ -1,0 +1,2692 @@
+[
+  {
+    "question_id": "q_01",
+    "top_5_chunks": [
+      "gymhero/security.py:create_access_token:12",
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/schemas/auth.py:Token:6",
+      "gymhero/schemas/auth.py:TokenPayload:13",
+      "gymhero/api/dependencies.py:get_token:35"
+    ]
+  },
+  {
+    "question_id": "q_02",
+    "top_5_chunks": [
+      "gymhero/api/dependencies.py:get_token:35",
+      "gymhero/security.py:create_access_token:12",
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/security.py:verify_password:38",
+      "gymhero/api/dependencies.py:get_current_user:58"
+    ]
+  },
+  {
+    "question_id": "q_03",
+    "top_5_chunks": [
+      "gymhero/crud/user.py:UserCRUDRepository.is_super_user:25",
+      "gymhero/schemas/user.py:UserInDB:23",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/schemas/user.py:UserUpdate:28",
+      "gymhero/schemas/user.py:UserCreate:12"
+    ]
+  },
+  {
+    "question_id": "q_04",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:create_user:95",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/api/routes/user.py:fetch_user_by_email:70",
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/api/routes/level.py:create_level:97"
+    ]
+  },
+  {
+    "question_id": "q_05",
+    "top_5_chunks": [
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/config.py:Settings:11",
+      "gymhero/crud/user.py:UserCRUDRepository.authenticate_user:67",
+      "gymhero/schemas/user.py:UserInDB:23",
+      "gymhero/schemas/auth.py:UserRegister:19"
+    ]
+  },
+  {
+    "question_id": "q_06",
+    "top_5_chunks": [
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/database/db.py:get_ctx_db:32",
+      "gymhero/api/dependencies.py:get_current_user:58",
+      "gymhero/database/session.py:get_local_session:42",
+      "gymhero/database/db.py:get_db:11"
+    ]
+  },
+  {
+    "question_id": "q_07",
+    "top_5_chunks": [
+      "gymhero/database/session.py:build_sqlalchemy_database_url_from_settings:8",
+      "gymhero/config.py:Settings:11",
+      "gymhero/database/session.py:get_engine:25",
+      "gymhero/database/session.py:get_local_session:42",
+      "gymhero/database/db.py:get_ctx_db:32"
+    ]
+  },
+  {
+    "question_id": "q_08",
+    "top_5_chunks": [
+      "gymhero/config.py:get_settings:65",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/config.py:Settings:11",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312"
+    ]
+  },
+  {
+    "question_id": "q_09",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.create_with_owner:162",
+      "gymhero/crud/base.py:CRUDRepository.get_many_for_owner:189",
+      "gymhero/crud/base.py:CRUDRepository.create:87",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/crud/base.py:CRUDRepository:20"
+    ]
+  },
+  {
+    "question_id": "q_10",
+    "top_5_chunks": [
+      "gymhero/exceptions.py:_get_credential_exception:5",
+      "gymhero/api/dependencies.py:get_token:35",
+      "gymhero/api/dependencies.py:get_current_superuser:105",
+      "gymhero/api/routes/training_unit.py:update_training_unit:222",
+      "gymhero/api/dependencies.py:get_current_active_user:82"
+    ]
+  },
+  {
+    "question_id": "q_11",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:create_training_plan:192",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/schemas/training_plan.py:TrainingPlanCreate:14",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10"
+    ]
+  },
+  {
+    "question_id": "q_12",
+    "top_5_chunks": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.add_training_unit_to_training_plan:11",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385"
+    ]
+  },
+  {
+    "question_id": "q_13",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise.py:ExerciseOut:48",
+      "gymhero/schemas/exercise.py:ExerciseBase:12",
+      "gymhero/schemas/exercise.py:ExerciseCreate:25",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/api/routes/exercise.py:create_exercise:133"
+    ]
+  },
+  {
+    "question_id": "q_14",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165"
+    ]
+  },
+  {
+    "question_id": "q_15",
+    "top_5_chunks": [
+      "gymhero/api/dependencies.py:get_pagination_params:19",
+      "gymhero/api/routes/body_part.py:fetch_body_parts:24",
+      "gymhero/api/routes/user.py:fetch_all_users:23",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises:22"
+    ]
+  },
+  {
+    "question_id": "g_01",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/training_unit.py:TrainingUnitInDB:22",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/schemas/exercise.py:ExerciseBase:12"
+    ]
+  },
+  {
+    "question_id": "g_02",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:fetch_body_parts:24",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77",
+      "gymhero/api/routes/user.py:fetch_all_users:23",
+      "gymhero/api/routes/level.py:fetch_all_levels:23"
+    ]
+  },
+  {
+    "question_id": "g_03",
+    "top_5_chunks": [
+      "gymhero/database/base_class.py:Base:22",
+      "gymhero/config.py:Settings:11",
+      "gymhero/schemas/level.py:LevelBase:7",
+      "gymhero/schemas/training_unit.py:TrainingUnitBase:9",
+      "gymhero/schemas/training_plan.py:TrainingPlanBase:9"
+    ]
+  },
+  {
+    "question_id": "g_04",
+    "top_5_chunks": [
+      "gymhero/schemas/training_unit.py:TrainingUnitBase:9",
+      "gymhero/models/training_unit.py:TrainingUnit:23",
+      "gymhero/api/routes/training_unit.py:create_training_unit:186",
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122"
+    ]
+  },
+  {
+    "question_id": "g_05",
+    "top_5_chunks": [
+      "gymhero/database/db.py:get_ctx_db:32",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/database/session.py:get_local_session:42",
+      "gymhero/database/session.py:get_engine:25",
+      "gymhero/database/base_class.py:Base:22"
+    ]
+  },
+  {
+    "question_id": "g_06",
+    "top_5_chunks": [
+      "gymhero/schemas/auth.py:UserRegister:19",
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/api/routes/user.py:create_user:95",
+      "gymhero/api/routes/user.py:update_user:175",
+      "gymhero/api/routes/auth.py:login_for_access_token:19"
+    ]
+  },
+  {
+    "question_id": "g_07",
+    "top_5_chunks": [
+      "gymhero/database/session.py:get_engine:25",
+      "gymhero/database/db.py:get_ctx_db:32",
+      "gymhero/database/session.py:build_sqlalchemy_database_url_from_settings:8",
+      "gymhero/api/routes/training_plan.py:create_training_plan:192",
+      "gymhero/api/routes/training_unit.py:create_training_unit:186"
+    ]
+  },
+  {
+    "question_id": "g_08",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:fetch_all_exercises_for_owner:46",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises:22"
+    ]
+  },
+  {
+    "question_id": "g_09",
+    "top_5_chunks": [
+      "gymhero/crud/user.py:UserCRUDRepository.deactivate_user:51",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/api/routes/user.py:delete_user:130",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/schemas/user.py:UserBase:6"
+    ]
+  },
+  {
+    "question_id": "g_10",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_all_training_units:34",
+      "gymhero/api/routes/training_unit.py:get_all_training_units_for_owner:58",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34",
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59"
+    ]
+  },
+  {
+    "question_id": "g_11",
+    "top_5_chunks": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/schemas/training_plan.py:TrainingPlanOut:30"
+    ]
+  },
+  {
+    "question_id": "g_12",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:fetch_all_exercise_types:28",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises:22",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises_for_owner:46",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79"
+    ]
+  },
+  {
+    "question_id": "g_13",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77",
+      "gymhero/models/body_part.py:BodyPart.__repr__:17",
+      "gymhero/schemas/body_part.py:BodyPartBase:7",
+      "gymhero/schemas/body_part.py:BodyPartOut:26",
+      "gymhero/models/body_part.py:BodyPart:7"
+    ]
+  },
+  {
+    "question_id": "g_14",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:fetch_level_by_id:48",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/level.py:delete_level:132",
+      "gymhero/api/routes/level.py:fetch_level_by_name:74"
+    ]
+  },
+  {
+    "question_id": "g_15",
+    "top_5_chunks": [
+      "gymhero/config.py:Settings:11",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/schemas/level.py:LevelInDB:19",
+      "gymhero/config.py:ContainerDevSettings:37",
+      "gymhero/schemas/user.py:UserOut:18"
+    ]
+  },
+  {
+    "question_id": "g_16",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:fetch_all_levels:23",
+      "gymhero/api/routes/user.py:fetch_all_users:23",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises:22",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises_for_owner:46",
+      "gymhero/api/routes/exercise_type.py:fetch_all_exercise_types:28"
+    ]
+  },
+  {
+    "question_id": "g_17",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:fetch_all_exercises:22",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises_for_owner:46",
+      "gymhero/api/routes/exercise_type.py:fetch_all_exercise_types:28",
+      "gymhero/api/routes/training_unit.py:get_all_training_units:34",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34"
+    ]
+  },
+  {
+    "question_id": "g_18",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:fetch_level_by_name:74",
+      "gymhero/api/routes/level.py:fetch_level_by_id:48",
+      "gymhero/api/routes/level.py:fetch_all_levels:23",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79"
+    ]
+  },
+  {
+    "question_id": "g_19",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:fetch_all_users:23",
+      "gymhero/api/routes/training_unit.py:get_all_training_units_for_owner:58",
+      "gymhero/api/routes/training_unit.py:get_all_training_units:34",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises_for_owner:46",
+      "gymhero/api/routes/level.py:fetch_all_levels:23"
+    ]
+  },
+  {
+    "question_id": "g_20",
+    "top_5_chunks": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385"
+    ]
+  },
+  {
+    "question_id": "g_21",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeUpdate:15",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/schemas/exercise.py:ExerciseUpdate:29"
+    ]
+  },
+  {
+    "question_id": "g_22",
+    "top_5_chunks": [
+      "gymhero/config.py:ContainerTestSettings:44",
+      "gymhero/config.py:LocalTestSettings:51",
+      "gymhero/config.py:get_settings:65",
+      "gymhero/config.py:Settings:11",
+      "gymhero/config.py:LocalDevSettings:58"
+    ]
+  },
+  {
+    "question_id": "g_23",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.get_exercises_in_training_unit:64",
+      "gymhero/api/routes/training_unit.py:get_all_training_units:34",
+      "gymhero/api/routes/training_unit.py:get_all_training_units_for_owner:58",
+      "gymhero/schemas/training_unit.py:TrainingUnitInDB:22"
+    ]
+  },
+  {
+    "question_id": "g_24",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeUpdate:15",
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109"
+    ]
+  },
+  {
+    "question_id": "g_25",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79",
+      "gymhero/models/exercise.py:ExerciseType.__repr__:41",
+      "gymhero/models/exercise.py:Exercise.__repr__:28",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeBase:7"
+    ]
+  },
+  {
+    "question_id": "g_26",
+    "top_5_chunks": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.check_if_exercise_in_training_unit:77",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.get_exercises_in_training_unit:64",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13"
+    ]
+  },
+  {
+    "question_id": "g_27",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_all_training_units_for_owner:58",
+      "gymhero/api/routes/training_unit.py:get_all_training_units:34",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises_for_owner:46",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises:22"
+    ]
+  },
+  {
+    "question_id": "g_28",
+    "top_5_chunks": [
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/api/routes/training_plan.py:create_training_plan:192",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10"
+    ]
+  },
+  {
+    "question_id": "g_29",
+    "top_5_chunks": [
+      "gymhero/schemas/training_plan.py:TrainingPlanUpdate:18",
+      "gymhero/schemas/training_plan.py:TrainingPlanCreate:14",
+      "gymhero/schemas/training_plan.py:TrainingPlanOut:30",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450"
+    ]
+  },
+  {
+    "question_id": "g_30",
+    "top_5_chunks": [
+      "gymhero/log.py:get_logger:14",
+      "gymhero/config.py:Settings:11",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/database/db.py:get_ctx_db:32"
+    ]
+  },
+  {
+    "question_id": "g_31",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/models/exercise.py:Exercise:8",
+      "gymhero/schemas/exercise.py:ExerciseBase:12"
+    ]
+  },
+  {
+    "question_id": "g_32",
+    "top_5_chunks": [
+      "gymhero/schemas/body_part.py:BodyPartInDB:19",
+      "gymhero/schemas/body_part.py:BodyPartBase:7",
+      "gymhero/schemas/body_part.py:BodyPartOut:26",
+      "gymhero/schemas/body_part.py:BodyPartUpdate:15",
+      "gymhero/schemas/body_part.py:BodyPartCreate:11"
+    ]
+  },
+  {
+    "question_id": "g_33",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises_for_owner:46",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165"
+    ]
+  },
+  {
+    "question_id": "g_34",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59",
+      "gymhero/api/routes/training_unit.py:get_all_training_units:34",
+      "gymhero/api/routes/training_unit.py:get_all_training_units_for_owner:58",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86"
+    ]
+  },
+  {
+    "question_id": "g_35",
+    "top_5_chunks": [
+      "gymhero/api/dependencies.py:get_token:35",
+      "gymhero/security.py:create_access_token:12",
+      "gymhero/schemas/auth.py:Token:6",
+      "gymhero/schemas/auth.py:TokenPayload:13",
+      "gymhero/api/routes/auth.py:login_for_access_token:19"
+    ]
+  },
+  {
+    "question_id": "g_36",
+    "top_5_chunks": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.add_training_unit_to_training_plan:11",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39"
+    ]
+  },
+  {
+    "question_id": "g_37",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:create_level:97",
+      "gymhero/schemas/level.py:LevelCreate:11",
+      "gymhero/schemas/level.py:LevelOut:26",
+      "gymhero/schemas/level.py:LevelUpdate:15",
+      "gymhero/schemas/level.py:LevelInDB:19"
+    ]
+  },
+  {
+    "question_id": "g_38",
+    "top_5_chunks": [
+      "gymhero/crud/user.py:UserCRUDRepository.authenticate_user:67",
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/schemas/user.py:UserUpdate:28"
+    ]
+  },
+  {
+    "question_id": "g_39",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.create:87",
+      "gymhero/crud/base.py:CRUDRepository.create_with_owner:162",
+      "gymhero/api/routes/body_part.py:create_body_part:102",
+      "gymhero/api/routes/training_plan.py:create_training_plan:192",
+      "gymhero/api/routes/level.py:create_level:97"
+    ]
+  },
+  {
+    "question_id": "g_40",
+    "top_5_chunks": [
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/api/routes/training_plan.py:create_training_plan:192",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229"
+    ]
+  },
+  {
+    "question_id": "g_41",
+    "top_5_chunks": [
+      "gymhero/schemas/training_unit.py:TrainingUnitOut:30",
+      "gymhero/schemas/training_unit.py:TrainingUnitInDB:22",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19"
+    ]
+  },
+  {
+    "question_id": "g_42",
+    "top_5_chunks": [
+      "gymhero/schemas/user.py:UserOut:18",
+      "gymhero/api/routes/user.py:create_user:95",
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/api/routes/user.py:update_user:175",
+      "gymhero/crud/user.py:UserCRUDRepository.get_user_by_email:11"
+    ]
+  },
+  {
+    "question_id": "g_43",
+    "top_5_chunks": [
+      "gymhero/config.py:LocalTestSettings:51",
+      "gymhero/config.py:LocalDevSettings:58",
+      "gymhero/config.py:get_settings:65",
+      "gymhero/config.py:ContainerTestSettings:44",
+      "gymhero/config.py:Settings:11"
+    ]
+  },
+  {
+    "question_id": "g_44",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127"
+    ]
+  },
+  {
+    "question_id": "g_45",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:fetch_user_by_id:46",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/api/routes/level.py:fetch_level_by_id:48",
+      "gymhero/api/routes/exercise.py:update_exercise:182"
+    ]
+  },
+  {
+    "question_id": "g_46",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise.py:ExerciseOut:48",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeBase:7",
+      "gymhero/schemas/exercise.py:ExerciseBase:12",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeCreate:11",
+      "gymhero/schemas/exercise.py:ExerciseCreate:25"
+    ]
+  },
+  {
+    "question_id": "g_47",
+    "top_5_chunks": [
+      "gymhero/schemas/auth.py:TokenPayload:13",
+      "gymhero/security.py:create_access_token:12",
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/schemas/auth.py:Token:6",
+      "gymhero/api/dependencies.py:get_token:35"
+    ]
+  },
+  {
+    "question_id": "g_48",
+    "top_5_chunks": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406"
+    ]
+  },
+  {
+    "question_id": "g_49",
+    "top_5_chunks": [
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/crud/user.py:UserCRUDRepository.get_user_by_email:11",
+      "gymhero/api/routes/user.py:fetch_user_by_email:70",
+      "gymhero/schemas/user.py:UserBase:6",
+      "gymhero/models/user.py:User.__repr__:20"
+    ]
+  },
+  {
+    "question_id": "g_50",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.update:111",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/body_part.py:update_body_part:173"
+    ]
+  },
+  {
+    "question_id": "g_51",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.get_many_for_owner:189",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises_for_owner:46",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59",
+      "gymhero/api/routes/training_unit.py:get_all_training_units_for_owner:58",
+      "gymhero/schemas/training_unit.py:TrainingUnitOut:30"
+    ]
+  },
+  {
+    "question_id": "g_52",
+    "top_5_chunks": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312"
+    ]
+  },
+  {
+    "question_id": "g_53",
+    "top_5_chunks": [
+      "gymhero/config.py:Settings:11",
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/schemas/auth.py:TokenPayload:13",
+      "gymhero/schemas/auth.py:Token:6",
+      "gymhero/security.py:create_access_token:12"
+    ]
+  },
+  {
+    "question_id": "g_54",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeBase:7",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeCreate:11",
+      "gymhero/models/exercise.py:ExerciseType:32"
+    ]
+  },
+  {
+    "question_id": "g_55",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:update_training_plan:279",
+      "gymhero/schemas/training_plan.py:TrainingPlanUpdate:18",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/schemas/training_plan.py:TrainingPlanCreate:14",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325"
+    ]
+  },
+  {
+    "question_id": "g_56",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeCreate:11",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeBase:7",
+      "gymhero/models/exercise.py:ExerciseType:32"
+    ]
+  },
+  {
+    "question_id": "g_57",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77",
+      "gymhero/api/routes/body_part.py:fetch_body_parts:24",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:create_body_part:102"
+    ]
+  },
+  {
+    "question_id": "g_58",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:create_body_part:102",
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77"
+    ]
+  },
+  {
+    "question_id": "g_59",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/schemas/body_part.py:BodyPartOut:26",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ]
+  },
+  {
+    "question_id": "g_60",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/models/body_part.py:BodyPart:7",
+      "gymhero/api/routes/body_part.py:create_body_part:102"
+    ]
+  },
+  {
+    "question_id": "g_61",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85"
+    ]
+  },
+  {
+    "question_id": "g_62",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/exercise.py:create_exercise:133",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13"
+    ]
+  },
+  {
+    "question_id": "g_63",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/api/routes/exercise.py:delete_exercise:232"
+    ]
+  },
+  {
+    "question_id": "g_64",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365"
+    ]
+  },
+  {
+    "question_id": "g_65",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19"
+    ]
+  },
+  {
+    "question_id": "g_66",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/exercise_type.py:fetch_all_exercise_types:28"
+    ]
+  },
+  {
+    "question_id": "g_67",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise_type.py:ExerciseTypeUpdate:15",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeBase:7"
+    ]
+  },
+  {
+    "question_id": "g_68",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:fetch_level_by_id:48",
+      "gymhero/api/routes/level.py:delete_level:132",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/schemas/level.py:LevelOut:26"
+    ]
+  },
+  {
+    "question_id": "g_69",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/level.py:fetch_level_by_id:48",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/schemas/level.py:LevelUpdate:15",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279"
+    ]
+  },
+  {
+    "question_id": "g_70",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/models/training_plan.py:TrainingPlan.__repr__:42"
+    ]
+  },
+  {
+    "question_id": "g_71",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86"
+    ]
+  },
+  {
+    "question_id": "g_72",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ]
+  },
+  {
+    "question_id": "g_73",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450"
+    ]
+  },
+  {
+    "question_id": "g_74",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/api/routes/training_unit.py:create_training_unit:186"
+    ]
+  },
+  {
+    "question_id": "g_75",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79"
+    ]
+  },
+  {
+    "question_id": "g_76",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:create_training_unit:186",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/models/training_unit.py:TrainingUnit:23",
+      "gymhero/models/training_unit.py:TrainingUnit.__repr__:42"
+    ]
+  },
+  {
+    "question_id": "g_77",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:update_training_unit:222",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10"
+    ]
+  },
+  {
+    "question_id": "g_78",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85"
+    ]
+  },
+  {
+    "question_id": "g_79",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/schemas/training_unit.py:TrainingUnitOut:30"
+    ]
+  },
+  {
+    "question_id": "g_80",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12"
+    ]
+  },
+  {
+    "question_id": "g_81",
+    "top_5_chunks": [
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/api/routes/user.py:create_user:95",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/api/routes/training_plan.py:create_training_plan:192",
+      "gymhero/crud/user.py:UserCRUDRepository.authenticate_user:67"
+    ]
+  },
+  {
+    "question_id": "g_82",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:delete_user:130",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/user.py:fetch_user_by_id:46",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ]
+  },
+  {
+    "question_id": "g_83",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:update_user:175",
+      "gymhero/api/routes/training_unit.py:update_training_unit:222",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279"
+    ]
+  },
+  {
+    "question_id": "g_84",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/database/base_class.py:Base:22",
+      "gymhero/crud/base.py:CRUDRepository.delete:145",
+      "gymhero/crud/base.py:CRUDRepository.create:87",
+      "gymhero/crud/base.py:CRUDRepository.update:111"
+    ]
+  },
+  {
+    "question_id": "g_85",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.__init__:23",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.update:111",
+      "gymhero/crud/base.py:CRUDRepository.create:87",
+      "gymhero/crud/base.py:CRUDRepository.delete:145"
+    ]
+  },
+  {
+    "question_id": "g_86",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.delete:145",
+      "gymhero/crud/base.py:CRUDRepository.get_one:33",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.update:111",
+      "gymhero/crud/base.py:CRUDRepository.get_many:53"
+    ]
+  },
+  {
+    "question_id": "g_87",
+    "top_5_chunks": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.get_training_units_in_training_plan:62",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/schemas/training_plan.py:TrainingPlanOut:30"
+    ]
+  },
+  {
+    "question_id": "g_88",
+    "top_5_chunks": [
+      "gymhero/crud/user.py:UserCRUDRepository.is_active_user:38",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/api/dependencies.py:get_current_active_user:82",
+      "gymhero/schemas/user.py:UserBase:6",
+      "gymhero/crud/user.py:UserCRUDRepository.deactivate_user:51"
+    ]
+  },
+  {
+    "question_id": "g_89",
+    "top_5_chunks": [
+      "gymhero/schemas/user.py:UserBase:6",
+      "gymhero/crud/user.py:UserCRUDRepository.deactivate_user:51",
+      "gymhero/crud/user.py:UserCRUDRepository.is_active_user:38",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385"
+    ]
+  },
+  {
+    "question_id": "g_90",
+    "top_5_chunks": [
+      "gymhero/models/level.py:Level:7",
+      "gymhero/schemas/level.py:LevelInDB:19",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.update:111",
+      "gymhero/crud/base.py:CRUDRepository.get_many:53"
+    ]
+  },
+  {
+    "question_id": "g_91",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.__init__:23",
+      "gymhero/models/training_unit.py:TrainingUnit:23",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/training_unit.py:TrainingUnitInDB:22"
+    ]
+  },
+  {
+    "question_id": "g_92",
+    "top_5_chunks": [
+      "gymhero/models/user.py:User:7",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.__init__:23",
+      "gymhero/crud/base.py:CRUDRepository.delete:145"
+    ]
+  },
+  {
+    "question_id": "g_93",
+    "top_5_chunks": [
+      "gymhero/schemas/body_part.py:BodyPartBase:7",
+      "gymhero/schemas/exercise.py:ExerciseBase:12",
+      "gymhero/schemas/body_part.py:BodyPartInDB:19",
+      "gymhero/schemas/body_part.py:BodyPartOut:26",
+      "gymhero/models/body_part.py:BodyPart:7"
+    ]
+  },
+  {
+    "question_id": "g_94",
+    "top_5_chunks": [
+      "gymhero/schemas/body_part.py:BodyPartInDB:19",
+      "gymhero/schemas/body_part.py:BodyPartOut:26",
+      "gymhero/schemas/body_part.py:BodyPartBase:7",
+      "gymhero/schemas/body_part.py:BodyPartUpdate:15",
+      "gymhero/schemas/body_part.py:BodyPartCreate:11"
+    ]
+  },
+  {
+    "question_id": "g_95",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise.py:ExerciseBase:12",
+      "gymhero/schemas/exercise.py:ExerciseUpdate:29",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeUpdate:15",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/api/routes/exercise.py:update_exercise:182"
+    ]
+  },
+  {
+    "question_id": "g_96",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:create_exercise:133",
+      "gymhero/schemas/exercise.py:ExerciseOut:48",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103"
+    ]
+  },
+  {
+    "question_id": "g_97",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/models/exercise.py:Exercise:8",
+      "gymhero/models/exercise.py:ExerciseType.__repr__:41",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79"
+    ]
+  },
+  {
+    "question_id": "g_98",
+    "top_5_chunks": [
+      "gymhero/schemas/level.py:LevelInDB:19",
+      "gymhero/schemas/level.py:LevelBase:7",
+      "gymhero/api/routes/level.py:create_level:97",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/level.py:delete_level:132"
+    ]
+  },
+  {
+    "question_id": "g_99",
+    "top_5_chunks": [
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/schemas/training_plan.py:TrainingPlanBase:9"
+    ]
+  },
+  {
+    "question_id": "g_100",
+    "top_5_chunks": [
+      "gymhero/schemas/training_unit.py:TrainingUnitBase:9",
+      "gymhero/models/training_unit.py:TrainingUnit:23",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/schemas/training_unit.py:TrainingUnitCreate:14",
+      "gymhero/models/training_plan.py:TrainingPlan:23"
+    ]
+  },
+  {
+    "question_id": "g_101",
+    "top_5_chunks": [
+      "gymhero/schemas/auth.py:UserRegister:19",
+      "gymhero/schemas/user.py:UserBase:6",
+      "gymhero/schemas/user.py:UserCreate:12",
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/schemas/user.py:UserInDB:23"
+    ]
+  },
+  {
+    "question_id": "g_102",
+    "top_5_chunks": [
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/api/routes/user.py:fetch_user_by_id:46",
+      "gymhero/api/routes/user.py:update_user:175",
+      "gymhero/api/dependencies.py:get_current_active_user:82",
+      "gymhero/api/dependencies.py:get_current_user:58"
+    ]
+  },
+  {
+    "question_id": "g_103",
+    "top_5_chunks": [
+      "gymhero/schemas/user.py:UserInDB:23",
+      "gymhero/schemas/auth.py:UserRegister:19",
+      "gymhero/schemas/user.py:UserCreate:12",
+      "gymhero/schemas/user.py:UserUpdate:28",
+      "gymhero/models/user.py:User:7"
+    ]
+  },
+  {
+    "question_id": "g_104",
+    "top_5_chunks": [
+      "gymhero/schemas/user.py:UserOut:18",
+      "gymhero/api/routes/user.py:update_user:175",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/training_unit.py:update_training_unit:222"
+    ]
+  },
+  {
+    "question_id": "g_105",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.create_with_owner:162",
+      "gymhero/crud/base.py:CRUDRepository.create:87",
+      "gymhero/crud/base.py:CRUDRepository.update:111",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.get_one:33"
+    ]
+  },
+  {
+    "question_id": "g_106",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.update:111",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/schemas/body_part.py:BodyPartUpdate:15",
+      "gymhero/schemas/body_part.py:BodyPartInDB:19"
+    ]
+  },
+  {
+    "question_id": "g_107",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.get_many_for_owner:189",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises_for_owner:46",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59",
+      "gymhero/api/routes/training_unit.py:get_all_training_units_for_owner:58",
+      "gymhero/api/routes/level.py:fetch_all_levels:23"
+    ]
+  },
+  {
+    "question_id": "g_108",
+    "top_5_chunks": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.add_training_unit_to_training_plan:11",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/schemas/training_plan.py:TrainingPlanOut:30"
+    ]
+  },
+  {
+    "question_id": "g_109",
+    "top_5_chunks": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450"
+    ]
+  },
+  {
+    "question_id": "g_110",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises:22",
+      "gymhero/schemas/training_unit.py:TrainingUnitInDB:22",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22"
+    ]
+  },
+  {
+    "question_id": "g_111",
+    "top_5_chunks": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13",
+      "gymhero/models/exercise.py:Exercise:8",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312"
+    ]
+  },
+  {
+    "question_id": "g_112",
+    "top_5_chunks": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187"
+    ]
+  },
+  {
+    "question_id": "g_113",
+    "top_5_chunks": [
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/crud/user.py:UserCRUDRepository.authenticate_user:67",
+      "gymhero/crud/user.py:UserCRUDRepository.get_user_by_email:11",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/api/routes/auth.py:login_for_access_token:19"
+    ]
+  },
+  {
+    "question_id": "g_114",
+    "top_5_chunks": [
+      "gymhero/models/exercise.py:Exercise:8",
+      "gymhero/models/training_unit.py:TrainingUnit:23",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13"
+    ]
+  },
+  {
+    "question_id": "g_115",
+    "top_5_chunks": [
+      "gymhero/api/dependencies.py:get_token:35",
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/exceptions.py:_get_credential_exception:5",
+      "gymhero/security.py:create_access_token:12",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325"
+    ]
+  },
+  {
+    "question_id": "g_116",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:fetch_body_parts:24",
+      "gymhero/api/routes/body_part.py:update_body_part:173"
+    ]
+  },
+  {
+    "question_id": "g_117",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77",
+      "gymhero/api/routes/body_part.py:create_body_part:102",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:update_body_part:173"
+    ]
+  },
+  {
+    "question_id": "g_118",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/api/routes/body_part.py:create_body_part:102",
+      "gymhero/schemas/body_part.py:BodyPartUpdate:15",
+      "gymhero/models/body_part.py:BodyPart:7",
+      "gymhero/api/routes/body_part.py:delete_body_part:130"
+    ]
+  },
+  {
+    "question_id": "g_119",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/models/body_part.py:BodyPart.__repr__:17",
+      "gymhero/models/body_part.py:BodyPart:7"
+    ]
+  },
+  {
+    "question_id": "g_120",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/api/routes/body_part.py:create_body_part:102",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77"
+    ]
+  },
+  {
+    "question_id": "g_121",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406"
+    ]
+  },
+  {
+    "question_id": "g_122",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:create_exercise:133",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13",
+      "gymhero/api/routes/exercise.py:update_exercise:182"
+    ]
+  },
+  {
+    "question_id": "g_123",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/api/routes/exercise.py:create_exercise:133",
+      "gymhero/api/routes/exercise.py:delete_exercise:232"
+    ]
+  },
+  {
+    "question_id": "g_124",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229"
+    ]
+  },
+  {
+    "question_id": "g_125",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187"
+    ]
+  },
+  {
+    "question_id": "g_126",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/models/exercise.py:ExerciseType.__repr__:41"
+    ]
+  },
+  {
+    "question_id": "g_127",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/exercise.py:create_exercise:133",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeCreate:11"
+    ]
+  },
+  {
+    "question_id": "g_128",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73"
+    ]
+  },
+  {
+    "question_id": "g_129",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26"
+    ]
+  },
+  {
+    "question_id": "g_130",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:create_level:97",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/log.py:get_logger:14",
+      "gymhero/schemas/level.py:LevelCreate:11",
+      "gymhero/api/routes/exercise.py:create_exercise:133"
+    ]
+  },
+  {
+    "question_id": "g_131",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:delete_level:132",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/level.py:fetch_level_by_id:48",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187"
+    ]
+  },
+  {
+    "question_id": "g_132",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/level.py:fetch_level_by_id:48",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/level.py:delete_level:132",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279"
+    ]
+  },
+  {
+    "question_id": "g_133",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/models/training_plan.py:TrainingPlan:23"
+    ]
+  },
+  {
+    "question_id": "g_134",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/models/training_plan.py:TrainingPlan.__repr__:42",
+      "gymhero/models/training_plan.py:TrainingPlan:23"
+    ]
+  },
+  {
+    "question_id": "g_135",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59",
+      "gymhero/models/user.py:User:7",
+      "gymhero/models/training_plan.py:TrainingPlan:23"
+    ]
+  },
+  {
+    "question_id": "g_136",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:update_training_plan:279",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.add_training_unit_to_training_plan:11",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385"
+    ]
+  },
+  {
+    "question_id": "g_137",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86"
+    ]
+  },
+  {
+    "question_id": "g_138",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.get_training_units_in_training_plan:62",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/schemas/training_plan.py:TrainingPlanOut:30",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325"
+    ]
+  },
+  {
+    "question_id": "g_139",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/api/routes/training_unit.py:update_training_unit:222"
+    ]
+  },
+  {
+    "question_id": "g_140",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165"
+    ]
+  },
+  {
+    "question_id": "g_141",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/api/routes/training_unit.py:create_training_unit:186",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85"
+    ]
+  },
+  {
+    "question_id": "g_142",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:create_training_plan:192",
+      "gymhero/api/routes/training_unit.py:create_training_unit:186",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10"
+    ]
+  },
+  {
+    "question_id": "g_143",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:update_training_unit:222",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/api/routes/training_unit.py:create_training_unit:186",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385"
+    ]
+  },
+  {
+    "question_id": "g_144",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187"
+    ]
+  },
+  {
+    "question_id": "g_145",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406"
+    ]
+  },
+  {
+    "question_id": "g_146",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.get_exercises_in_training_unit:64",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12"
+    ]
+  },
+  {
+    "question_id": "g_147",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ]
+  },
+  {
+    "question_id": "g_148",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:fetch_user_by_email:70",
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/crud/user.py:UserCRUDRepository.get_user_by_email:11",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/api/routes/user.py:create_user:95"
+    ]
+  },
+  {
+    "question_id": "g_149",
+    "top_5_chunks": [
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/api/routes/user.py:create_user:95",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/schemas/auth.py:UserRegister:19"
+    ]
+  },
+  {
+    "question_id": "g_150",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:delete_user:130",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ]
+  },
+  {
+    "question_id": "g_151",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:update_user:175",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/training_unit.py:update_training_unit:222",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279"
+    ]
+  },
+  {
+    "question_id": "g_152",
+    "top_5_chunks": [
+      "gymhero/config.py:ContainerDevSettings:37",
+      "gymhero/config.py:get_settings:65",
+      "gymhero/config.py:LocalDevSettings:58",
+      "gymhero/config.py:Settings:11",
+      "gymhero/config.py:LocalTestSettings:51"
+    ]
+  },
+  {
+    "question_id": "g_153",
+    "top_5_chunks": [
+      "gymhero/config.py:ContainerTestSettings:44",
+      "gymhero/config.py:LocalTestSettings:51",
+      "gymhero/config.py:get_settings:65",
+      "gymhero/config.py:ContainerDevSettings:37",
+      "gymhero/config.py:Settings:11"
+    ]
+  },
+  {
+    "question_id": "g_154",
+    "top_5_chunks": [
+      "gymhero/config.py:LocalTestSettings:51",
+      "gymhero/config.py:LocalDevSettings:58",
+      "gymhero/config.py:ContainerTestSettings:44",
+      "gymhero/config.py:get_settings:65",
+      "gymhero/config.py:Settings:11"
+    ]
+  },
+  {
+    "question_id": "g_155",
+    "top_5_chunks": [
+      "gymhero/database/base_class.py:Base:22",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.delete:145",
+      "gymhero/crud/base.py:CRUDRepository.create:87",
+      "gymhero/crud/base.py:CRUDRepository.update:111"
+    ]
+  },
+  {
+    "question_id": "g_57",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77",
+      "gymhero/api/routes/body_part.py:fetch_body_parts:24",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:create_body_part:102"
+    ]
+  },
+  {
+    "question_id": "g_58",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:create_body_part:102",
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77"
+    ]
+  },
+  {
+    "question_id": "g_59",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/schemas/body_part.py:BodyPartOut:26",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ]
+  },
+  {
+    "question_id": "g_60",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/models/body_part.py:BodyPart:7",
+      "gymhero/api/routes/body_part.py:create_body_part:102"
+    ]
+  },
+  {
+    "question_id": "g_61",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85"
+    ]
+  },
+  {
+    "question_id": "g_62",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/exercise.py:create_exercise:133",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13"
+    ]
+  },
+  {
+    "question_id": "g_63",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/api/routes/exercise.py:delete_exercise:232"
+    ]
+  },
+  {
+    "question_id": "g_64",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365"
+    ]
+  },
+  {
+    "question_id": "g_65",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19"
+    ]
+  },
+  {
+    "question_id": "g_66",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/exercise_type.py:fetch_all_exercise_types:28"
+    ]
+  },
+  {
+    "question_id": "g_67",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise_type.py:ExerciseTypeUpdate:15",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeBase:7"
+    ]
+  },
+  {
+    "question_id": "g_68",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:fetch_level_by_id:48",
+      "gymhero/api/routes/level.py:delete_level:132",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/schemas/level.py:LevelOut:26"
+    ]
+  },
+  {
+    "question_id": "g_69",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/level.py:fetch_level_by_id:48",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/schemas/level.py:LevelUpdate:15",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279"
+    ]
+  },
+  {
+    "question_id": "g_70",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/models/training_plan.py:TrainingPlan.__repr__:42"
+    ]
+  },
+  {
+    "question_id": "g_71",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86"
+    ]
+  },
+  {
+    "question_id": "g_72",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ]
+  },
+  {
+    "question_id": "g_73",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450"
+    ]
+  },
+  {
+    "question_id": "g_74",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/api/routes/training_unit.py:create_training_unit:186"
+    ]
+  },
+  {
+    "question_id": "g_75",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79"
+    ]
+  },
+  {
+    "question_id": "g_76",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:create_training_unit:186",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/models/training_unit.py:TrainingUnit:23",
+      "gymhero/models/training_unit.py:TrainingUnit.__repr__:42"
+    ]
+  },
+  {
+    "question_id": "g_77",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:update_training_unit:222",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10"
+    ]
+  },
+  {
+    "question_id": "g_78",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85"
+    ]
+  },
+  {
+    "question_id": "g_79",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/schemas/training_unit.py:TrainingUnitOut:30"
+    ]
+  },
+  {
+    "question_id": "g_80",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12"
+    ]
+  },
+  {
+    "question_id": "g_81",
+    "top_5_chunks": [
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/api/routes/user.py:create_user:95",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/api/routes/training_plan.py:create_training_plan:192",
+      "gymhero/crud/user.py:UserCRUDRepository.authenticate_user:67"
+    ]
+  },
+  {
+    "question_id": "g_82",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:delete_user:130",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/user.py:fetch_user_by_id:46",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ]
+  },
+  {
+    "question_id": "g_83",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:update_user:175",
+      "gymhero/api/routes/training_unit.py:update_training_unit:222",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279"
+    ]
+  },
+  {
+    "question_id": "g_84",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/database/base_class.py:Base:22",
+      "gymhero/crud/base.py:CRUDRepository.delete:145",
+      "gymhero/crud/base.py:CRUDRepository.create:87",
+      "gymhero/crud/base.py:CRUDRepository.update:111"
+    ]
+  },
+  {
+    "question_id": "g_85",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.__init__:23",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.update:111",
+      "gymhero/crud/base.py:CRUDRepository.create:87",
+      "gymhero/crud/base.py:CRUDRepository.delete:145"
+    ]
+  },
+  {
+    "question_id": "g_86",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.delete:145",
+      "gymhero/crud/base.py:CRUDRepository.get_one:33",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.update:111",
+      "gymhero/crud/base.py:CRUDRepository.get_many:53"
+    ]
+  },
+  {
+    "question_id": "g_87",
+    "top_5_chunks": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.get_training_units_in_training_plan:62",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/schemas/training_plan.py:TrainingPlanOut:30"
+    ]
+  },
+  {
+    "question_id": "g_88",
+    "top_5_chunks": [
+      "gymhero/crud/user.py:UserCRUDRepository.is_active_user:38",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/api/dependencies.py:get_current_active_user:82",
+      "gymhero/schemas/user.py:UserBase:6",
+      "gymhero/crud/user.py:UserCRUDRepository.deactivate_user:51"
+    ]
+  },
+  {
+    "question_id": "g_89",
+    "top_5_chunks": [
+      "gymhero/schemas/user.py:UserBase:6",
+      "gymhero/crud/user.py:UserCRUDRepository.deactivate_user:51",
+      "gymhero/crud/user.py:UserCRUDRepository.is_active_user:38",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385"
+    ]
+  },
+  {
+    "question_id": "g_90",
+    "top_5_chunks": [
+      "gymhero/models/level.py:Level:7",
+      "gymhero/schemas/level.py:LevelInDB:19",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.update:111",
+      "gymhero/crud/base.py:CRUDRepository.get_many:53"
+    ]
+  },
+  {
+    "question_id": "g_91",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.__init__:23",
+      "gymhero/models/training_unit.py:TrainingUnit:23",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeInDB:19",
+      "gymhero/schemas/training_unit.py:TrainingUnitInDB:22"
+    ]
+  },
+  {
+    "question_id": "g_92",
+    "top_5_chunks": [
+      "gymhero/models/user.py:User:7",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.__init__:23",
+      "gymhero/crud/base.py:CRUDRepository.delete:145"
+    ]
+  },
+  {
+    "question_id": "g_93",
+    "top_5_chunks": [
+      "gymhero/schemas/body_part.py:BodyPartBase:7",
+      "gymhero/schemas/exercise.py:ExerciseBase:12",
+      "gymhero/schemas/body_part.py:BodyPartInDB:19",
+      "gymhero/schemas/body_part.py:BodyPartOut:26",
+      "gymhero/models/body_part.py:BodyPart:7"
+    ]
+  },
+  {
+    "question_id": "g_94",
+    "top_5_chunks": [
+      "gymhero/schemas/body_part.py:BodyPartInDB:19",
+      "gymhero/schemas/body_part.py:BodyPartOut:26",
+      "gymhero/schemas/body_part.py:BodyPartBase:7",
+      "gymhero/schemas/body_part.py:BodyPartUpdate:15",
+      "gymhero/schemas/body_part.py:BodyPartCreate:11"
+    ]
+  },
+  {
+    "question_id": "g_95",
+    "top_5_chunks": [
+      "gymhero/schemas/exercise.py:ExerciseBase:12",
+      "gymhero/schemas/exercise.py:ExerciseUpdate:29",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeUpdate:15",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/api/routes/exercise.py:update_exercise:182"
+    ]
+  },
+  {
+    "question_id": "g_96",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:create_exercise:133",
+      "gymhero/schemas/exercise.py:ExerciseOut:48",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103"
+    ]
+  },
+  {
+    "question_id": "g_97",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/models/exercise.py:Exercise:8",
+      "gymhero/models/exercise.py:ExerciseType.__repr__:41",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79"
+    ]
+  },
+  {
+    "question_id": "g_98",
+    "top_5_chunks": [
+      "gymhero/schemas/level.py:LevelInDB:19",
+      "gymhero/schemas/level.py:LevelBase:7",
+      "gymhero/api/routes/level.py:create_level:97",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/level.py:delete_level:132"
+    ]
+  },
+  {
+    "question_id": "g_99",
+    "top_5_chunks": [
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans:34",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/schemas/training_plan.py:TrainingPlanBase:9"
+    ]
+  },
+  {
+    "question_id": "g_100",
+    "top_5_chunks": [
+      "gymhero/schemas/training_unit.py:TrainingUnitBase:9",
+      "gymhero/models/training_unit.py:TrainingUnit:23",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/schemas/training_unit.py:TrainingUnitCreate:14",
+      "gymhero/models/training_plan.py:TrainingPlan:23"
+    ]
+  },
+  {
+    "question_id": "g_101",
+    "top_5_chunks": [
+      "gymhero/schemas/auth.py:UserRegister:19",
+      "gymhero/schemas/user.py:UserBase:6",
+      "gymhero/schemas/user.py:UserCreate:12",
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/schemas/user.py:UserInDB:23"
+    ]
+  },
+  {
+    "question_id": "g_102",
+    "top_5_chunks": [
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/api/routes/user.py:fetch_user_by_id:46",
+      "gymhero/api/routes/user.py:update_user:175",
+      "gymhero/api/dependencies.py:get_current_active_user:82",
+      "gymhero/api/dependencies.py:get_current_user:58"
+    ]
+  },
+  {
+    "question_id": "g_103",
+    "top_5_chunks": [
+      "gymhero/schemas/user.py:UserInDB:23",
+      "gymhero/schemas/auth.py:UserRegister:19",
+      "gymhero/schemas/user.py:UserCreate:12",
+      "gymhero/schemas/user.py:UserUpdate:28",
+      "gymhero/models/user.py:User:7"
+    ]
+  },
+  {
+    "question_id": "g_104",
+    "top_5_chunks": [
+      "gymhero/schemas/user.py:UserOut:18",
+      "gymhero/api/routes/user.py:update_user:175",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/training_unit.py:update_training_unit:222"
+    ]
+  },
+  {
+    "question_id": "g_105",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.create_with_owner:162",
+      "gymhero/crud/base.py:CRUDRepository.create:87",
+      "gymhero/crud/base.py:CRUDRepository.update:111",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.get_one:33"
+    ]
+  },
+  {
+    "question_id": "g_106",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.update:111",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/schemas/body_part.py:BodyPartUpdate:15",
+      "gymhero/schemas/body_part.py:BodyPartInDB:19"
+    ]
+  },
+  {
+    "question_id": "g_107",
+    "top_5_chunks": [
+      "gymhero/crud/base.py:CRUDRepository.get_many_for_owner:189",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises_for_owner:46",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59",
+      "gymhero/api/routes/training_unit.py:get_all_training_units_for_owner:58",
+      "gymhero/api/routes/level.py:fetch_all_levels:23"
+    ]
+  },
+  {
+    "question_id": "g_108",
+    "top_5_chunks": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.add_training_unit_to_training_plan:11",
+      "gymhero/models/training_plan.py:TrainingPlan:23",
+      "gymhero/schemas/training_plan.py:TrainingPlanOut:30"
+    ]
+  },
+  {
+    "question_id": "g_109",
+    "top_5_chunks": [
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450"
+    ]
+  },
+  {
+    "question_id": "g_110",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/api/routes/exercise.py:fetch_all_exercises:22",
+      "gymhero/schemas/training_unit.py:TrainingUnitInDB:22",
+      "gymhero/schemas/training_plan.py:TrainingPlanInDB:22"
+    ]
+  },
+  {
+    "question_id": "g_111",
+    "top_5_chunks": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13",
+      "gymhero/models/exercise.py:Exercise:8",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312"
+    ]
+  },
+  {
+    "question_id": "g_112",
+    "top_5_chunks": [
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187"
+    ]
+  },
+  {
+    "question_id": "g_113",
+    "top_5_chunks": [
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/crud/user.py:UserCRUDRepository.authenticate_user:67",
+      "gymhero/crud/user.py:UserCRUDRepository.get_user_by_email:11",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/api/routes/auth.py:login_for_access_token:19"
+    ]
+  },
+  {
+    "question_id": "g_114",
+    "top_5_chunks": [
+      "gymhero/models/exercise.py:Exercise:8",
+      "gymhero/models/training_unit.py:TrainingUnit:23",
+      "gymhero/schemas/exercise.py:ExerciseInDB:37",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13"
+    ]
+  },
+  {
+    "question_id": "g_115",
+    "top_5_chunks": [
+      "gymhero/api/dependencies.py:get_token:35",
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/exceptions.py:_get_credential_exception:5",
+      "gymhero/security.py:create_access_token:12",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325"
+    ]
+  },
+  {
+    "question_id": "g_116",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:fetch_body_parts:24",
+      "gymhero/api/routes/body_part.py:update_body_part:173"
+    ]
+  },
+  {
+    "question_id": "g_117",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77",
+      "gymhero/api/routes/body_part.py:create_body_part:102",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:update_body_part:173"
+    ]
+  },
+  {
+    "question_id": "g_118",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/api/routes/body_part.py:create_body_part:102",
+      "gymhero/schemas/body_part.py:BodyPartUpdate:15",
+      "gymhero/models/body_part.py:BodyPart:7",
+      "gymhero/api/routes/body_part.py:delete_body_part:130"
+    ]
+  },
+  {
+    "question_id": "g_119",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/models/body_part.py:BodyPart.__repr__:17",
+      "gymhero/models/body_part.py:BodyPart:7"
+    ]
+  },
+  {
+    "question_id": "g_120",
+    "top_5_chunks": [
+      "gymhero/api/routes/body_part.py:update_body_part:173",
+      "gymhero/api/routes/body_part.py:create_body_part:102",
+      "gymhero/api/routes/body_part.py:delete_body_part:130",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_id:47",
+      "gymhero/api/routes/body_part.py:fetch_body_part_by_name:77"
+    ]
+  },
+  {
+    "question_id": "g_121",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406"
+    ]
+  },
+  {
+    "question_id": "g_122",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:create_exercise:133",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13",
+      "gymhero/api/routes/exercise.py:update_exercise:182"
+    ]
+  },
+  {
+    "question_id": "g_123",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/api/routes/exercise.py:create_exercise:133",
+      "gymhero/api/routes/exercise.py:delete_exercise:232"
+    ]
+  },
+  {
+    "question_id": "g_124",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229"
+    ]
+  },
+  {
+    "question_id": "g_125",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73",
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187"
+    ]
+  },
+  {
+    "question_id": "g_126",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/models/exercise.py:ExerciseType.__repr__:41"
+    ]
+  },
+  {
+    "question_id": "g_127",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/api/routes/exercise.py:create_exercise:133",
+      "gymhero/models/exercise.py:ExerciseType:32",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_name:79",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeCreate:11"
+    ]
+  },
+  {
+    "question_id": "g_128",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:update_exercise_type:140",
+      "gymhero/api/routes/exercise_type.py:fetch_exercise_type_by_id:50",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_id:73"
+    ]
+  },
+  {
+    "question_id": "g_129",
+    "top_5_chunks": [
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267",
+      "gymhero/schemas/exercise_type.py:ExerciseTypeOut:26"
+    ]
+  },
+  {
+    "question_id": "g_130",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:create_level:97",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/log.py:get_logger:14",
+      "gymhero/schemas/level.py:LevelCreate:11",
+      "gymhero/api/routes/exercise.py:create_exercise:133"
+    ]
+  },
+  {
+    "question_id": "g_131",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:delete_level:132",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/level.py:fetch_level_by_id:48",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187"
+    ]
+  },
+  {
+    "question_id": "g_132",
+    "top_5_chunks": [
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/level.py:fetch_level_by_id:48",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/level.py:delete_level:132",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279"
+    ]
+  },
+  {
+    "question_id": "g_133",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/models/training_plan.py:TrainingPlan:23"
+    ]
+  },
+  {
+    "question_id": "g_134",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86",
+      "gymhero/models/training_plan.py:TrainingPlan.__repr__:42",
+      "gymhero/models/training_plan.py:TrainingPlan:23"
+    ]
+  },
+  {
+    "question_id": "g_135",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_plan.py:get_all_training_plans_for_owner:59",
+      "gymhero/models/user.py:User:7",
+      "gymhero/models/training_plan.py:TrainingPlan:23"
+    ]
+  },
+  {
+    "question_id": "g_136",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:update_training_plan:279",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.add_training_unit_to_training_plan:11",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385"
+    ]
+  },
+  {
+    "question_id": "g_137",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.remove_training_unit_from_training_plan:36",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_id:86"
+    ]
+  },
+  {
+    "question_id": "g_138",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD.get_training_units_in_training_plan:62",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10",
+      "gymhero/schemas/training_plan.py:TrainingPlanOut:30",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325"
+    ]
+  },
+  {
+    "question_id": "g_139",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/api/routes/training_unit.py:update_training_unit:222"
+    ]
+  },
+  {
+    "question_id": "g_140",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:get_training_plan_by_name:127",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/exercise.py:fetch_exercise_by_name:103",
+      "gymhero/api/routes/training_plan.py:get_training_plans_by_name_for_super_user:165"
+    ]
+  },
+  {
+    "question_id": "g_141",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_training_units_by_name:157",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_name:122",
+      "gymhero/api/routes/training_plan.py:get_training_units_in_training_plan:450",
+      "gymhero/api/routes/training_unit.py:create_training_unit:186",
+      "gymhero/api/routes/training_unit.py:get_training_unit_by_id:85"
+    ]
+  },
+  {
+    "question_id": "g_142",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_plan.py:create_training_plan:192",
+      "gymhero/api/routes/training_unit.py:create_training_unit:186",
+      "gymhero/api/routes/exercise_type.py:create_exercise_type:109",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/crud/training_plan.py:TrainingPlanCRUD:10"
+    ]
+  },
+  {
+    "question_id": "g_143",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:update_training_unit:222",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/api/routes/training_plan.py:add_training_unit_to_training_plan:325",
+      "gymhero/api/routes/training_unit.py:create_training_unit:186",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385"
+    ]
+  },
+  {
+    "question_id": "g_144",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187"
+    ]
+  },
+  {
+    "question_id": "g_145",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.add_exercise_to_training_unit:13",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12",
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406"
+    ]
+  },
+  {
+    "question_id": "g_146",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:get_exercises_in_training_unit:365",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.get_exercises_in_training_unit:64",
+      "gymhero/api/routes/training_unit.py:add_exercise_to_training_unit:312",
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD:12"
+    ]
+  },
+  {
+    "question_id": "g_147",
+    "top_5_chunks": [
+      "gymhero/api/routes/training_unit.py:remove_exercise_from_training_unit:406",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/crud/training_unit.py:TrainingUnitCRUD.remove_exercise_from_training_unit:39",
+      "gymhero/api/routes/exercise_type.py:delete_exercise_type:187",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ]
+  },
+  {
+    "question_id": "g_148",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:fetch_user_by_email:70",
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/crud/user.py:UserCRUDRepository.get_user_by_email:11",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/api/routes/user.py:create_user:95"
+    ]
+  },
+  {
+    "question_id": "g_149",
+    "top_5_chunks": [
+      "gymhero/api/routes/auth.py:register:55",
+      "gymhero/api/routes/auth.py:login_for_access_token:19",
+      "gymhero/api/routes/user.py:create_user:95",
+      "gymhero/crud/user.py:UserCRUDRepository:10",
+      "gymhero/schemas/auth.py:UserRegister:19"
+    ]
+  },
+  {
+    "question_id": "g_150",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:delete_user:130",
+      "gymhero/api/routes/exercise.py:delete_exercise:232",
+      "gymhero/api/routes/training_plan.py:delete_training_plan:229",
+      "gymhero/api/routes/training_plan.py:remove_training_unit_from_training_plan:385",
+      "gymhero/api/routes/training_unit.py:delete_training_unit:267"
+    ]
+  },
+  {
+    "question_id": "g_151",
+    "top_5_chunks": [
+      "gymhero/api/routes/user.py:update_user:175",
+      "gymhero/api/routes/level.py:update_level:176",
+      "gymhero/api/routes/exercise.py:update_exercise:182",
+      "gymhero/api/routes/training_unit.py:update_training_unit:222",
+      "gymhero/api/routes/training_plan.py:update_training_plan:279"
+    ]
+  },
+  {
+    "question_id": "g_152",
+    "top_5_chunks": [
+      "gymhero/config.py:ContainerDevSettings:37",
+      "gymhero/config.py:get_settings:65",
+      "gymhero/config.py:LocalDevSettings:58",
+      "gymhero/config.py:Settings:11",
+      "gymhero/config.py:LocalTestSettings:51"
+    ]
+  },
+  {
+    "question_id": "g_153",
+    "top_5_chunks": [
+      "gymhero/config.py:ContainerTestSettings:44",
+      "gymhero/config.py:LocalTestSettings:51",
+      "gymhero/config.py:get_settings:65",
+      "gymhero/config.py:ContainerDevSettings:37",
+      "gymhero/config.py:Settings:11"
+    ]
+  },
+  {
+    "question_id": "g_154",
+    "top_5_chunks": [
+      "gymhero/config.py:LocalTestSettings:51",
+      "gymhero/config.py:LocalDevSettings:58",
+      "gymhero/config.py:ContainerTestSettings:44",
+      "gymhero/config.py:get_settings:65",
+      "gymhero/config.py:Settings:11"
+    ]
+  },
+  {
+    "question_id": "g_155",
+    "top_5_chunks": [
+      "gymhero/database/base_class.py:Base:22",
+      "gymhero/crud/base.py:CRUDRepository:20",
+      "gymhero/crud/base.py:CRUDRepository.delete:145",
+      "gymhero/crud/base.py:CRUDRepository.create:87",
+      "gymhero/crud/base.py:CRUDRepository.update:111"
+    ]
+  }
+]

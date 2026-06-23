@@ -18,3 +18,4 @@
 # https://github.com/benjaminp/six
 # https://github.com/psf/requests
 # https://github.com/pallets/flask
+https://github.com/BVLC/caffe.git
