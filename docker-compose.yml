@@ -1,6 +1,7 @@
 # CodeLens — Docker Compose (бонус §8 CLAUDE.md).
 #
-#   docker compose up --build           # собрать образ, построить базу, поднять UI
+#   docker compose up --build                       # вся база (≥80 файлов), UI на :8501
+#   INDEX_SCOPE=gymhero docker compose up --build   # только gymhero (быстрый/официальный)
 #   открыть http://localhost:8501
 #
 # Локальный запуск двумя командами (python index.py + streamlit run app.py)
@@ -14,6 +15,9 @@ services:
     ports:
       - "8501:8501"
     environment:
+      # Режим индексации при первом старте (см. docker/entrypoint.sh):
+      #   full (по умолчанию) — вся база 168 файлов; gymhero — только официальная коллекция.
+      INDEX_SCOPE: "${INDEX_SCOPE:-full}"
       # Внутри сети compose Ollama доступна по имени сервиса, а не localhost.
       OLLAMA_URL: "http://ollama:11434/api/generate"
       OLLAMA_MODEL: "qwen2.5-coder:7b"
