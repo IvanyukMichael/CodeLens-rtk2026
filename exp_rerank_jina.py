@@ -93,6 +93,22 @@ def paired_bootstrap(sc_a: dict, sc_b: dict, questions: list[dict], n_boot=10000
 
 def main():
     import torch
+
+    import transformers.models.xlm_roberta.modeling_xlm_roberta as xlm_roberta_mod
+
+    if not hasattr(xlm_roberta_mod, 'create_position_ids_from_input_ids'):
+        # Функция, идентичная старой версии из transformers <4.40
+        def create_position_ids_from_input_ids(input_ids, padding_idx, past_key_values_length=0):
+            """
+            Заменяет отсутствующую в новых версиях transformers функцию,
+            которая нужна модели jina-reranker-v2.
+            """
+            mask = input_ids.ne(padding_idx).int()
+            incremental_indices = (mask.cumsum(dim=1) + past_key_values_length) * mask
+            return incremental_indices.long() + padding_idx
+
+        xlm_roberta_mod.create_position_ids_from_input_ids = create_position_ids_from_input_ids
+
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"device: {device}")
     if device == "cpu":
@@ -123,6 +139,7 @@ def main():
     score_cache = pickle.loads(cache_file.read_bytes()) if cache_file.exists() else {}
 
     from sentence_transformers import CrossEncoder
+    
     print(f"загрузка реранкера {RERANKER} (trust_remote_code=True) ...")
     ce = CrossEncoder(RERANKER, device=device, max_length=1024, trust_remote_code=True)
     rr = rerank.rerank(ce, questions, candidates, enriched_map, score_cache)
